@@ -11,7 +11,7 @@ class Member extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["useres_id", "place_of_birth", "date_of_birth",
+    protected $fillable = ["users_id", "place_of_birth", "date_of_birth",
         "phone_number", "gender", "position", "address"];
 
     protected $hidden = [];
