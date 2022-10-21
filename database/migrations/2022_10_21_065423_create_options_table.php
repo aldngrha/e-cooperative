@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBankInterestsTable extends Migration
+class CreateOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateBankInterestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_interests', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->integer("members_id");
+            $table->integer("min_saving");
+            $table->integer("min_saving_must");
+            $table->integer("min_loan");
             $table->integer("interest_rate");
-            $table->integer("nominal_interest");
+            $table->integer("max_loan");
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ class CreateBankInterestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_interests');
+        Schema::dropIfExists('options');
     }
 }

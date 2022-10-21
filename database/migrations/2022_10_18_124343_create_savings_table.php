@@ -15,7 +15,8 @@ class CreateSavingsTable extends Migration
     {
         Schema::create('savings', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->integer("members_id");
+            $table->integer("users_id");
+            $table->integer("deposit_id");
             $table->integer("amount_save");
             $table->string("description");
             $table->softDeletes();
