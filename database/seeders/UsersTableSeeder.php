@@ -25,6 +25,12 @@ class UsersTableSeeder extends Seeder
             "name" => "user",
             "email" => "user@gmail.com",
             "password" => bcrypt("userkoperasi"),
+            "place_of_birth" => "bandar lampung",
+            "date_of_birth" => now(),
+            "phone_number" => "098917231",
+            "gender" => "M",
+            "position" => "Guru",
+            "address" => "jl dr jarusn 1 jahsjha",
             "roles" => "USER",
         ]);
     }
