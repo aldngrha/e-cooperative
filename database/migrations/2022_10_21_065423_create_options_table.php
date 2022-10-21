@@ -15,11 +15,8 @@ class CreateOptionsTable extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->integer("min_saving");
-            $table->integer("min_saving_must");
-            $table->integer("min_loan");
             $table->integer("interest_rate");
-            $table->integer("max_loan");
+            $table->integer("time_period");
             $table->softDeletes();
             $table->timestamps();
         });
