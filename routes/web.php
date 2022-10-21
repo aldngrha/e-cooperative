@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SavingController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 
 /*
@@ -18,6 +20,9 @@ use App\Http\Controllers\Admin\DashboardController;
 
 Route::middleware(["auth","user"])->group(function () {
     Route::get("/", [HomeController::class, "index"])->name("home");
+    Route::get("/saving", [SavingController::class, "index"])->name("saving");
+    Route::get("/profile/edit", [UserController::class, "edit"])->name("edit");
+    Route::put("/profile/edit", [UserController::class, "update"])->name("update");
 });
 
 Route::prefix("admin")
@@ -25,7 +30,8 @@ Route::prefix("admin")
     ->middleware(["auth", "admin"])
     ->group(function () {
         Route::get('/', [DashboardController::class, "index"])->name("dashboard");
-        Route::resource("member", "MemberController");
+
+        Route::resource("saving", "SavingController");
 });
 
 Auth::routes();
