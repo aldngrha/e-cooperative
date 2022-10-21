@@ -19,8 +19,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        "username",
         'email',
         'password',
+        "place_of_birth",
+        "date_of_birth",
+        "phone_number",
+        "gender",
+        "position",
+        "address"
     ];
 
     /**
@@ -42,7 +49,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function members() {
-        return $this->hasOne(Member::class, "users_id", "id");
+    public function balances() {
+        return $this->hasOne(Saving::class, "users_id", "id");
+    }
+
+    public function loans() {
+        return $this->hasMany(Loan::class, "users_id", "id");
+    }
+
+    public function withdraws() {
+        return $this->hasMany(Withdraw::class, "users_id", "id");
+    }
+
+    public function deposits() {
+        return $this->hasMany(Deposit::class, "users_id", "id");
     }
 }
