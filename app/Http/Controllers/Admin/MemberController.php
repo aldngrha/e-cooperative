@@ -15,10 +15,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $items = User::with(["members"])->get();
-
+        $users = User::all();
         return view("pages.admin.member.index", [
-          "items" => $items,
+            "users" => $users
         ]);
     }
 
@@ -85,6 +84,9 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return back()->with("message", "Anggota telah dihapus");
     }
 }
