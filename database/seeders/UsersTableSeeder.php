@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             "name" => "admin",
             "email" => "ekoperasi@gmail.com",
             "password" => bcrypt("adminkoperasi"),
+            "created_at" => now(),
             "roles" => "ADMIN",
         ]);
 
@@ -28,9 +29,10 @@ class UsersTableSeeder extends Seeder
             "place_of_birth" => "bandar lampung",
             "date_of_birth" => now(),
             "phone_number" => "098917231",
-            "gender" => "M",
+            "gender" => "Laki-Laki",
             "position" => "Guru",
             "address" => "jl dr jarusn 1 jahsjha",
+            "created_at" => now(),
             "roles" => "USER",
         ]);
     }
