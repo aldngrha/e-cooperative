@@ -9,12 +9,17 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tabel Anggota</h1>
+
+        @if(session()->has("message"))
+            <div class="alert alert-success">
+                <p>{{  session()->get("message") }}</p>
+            </div>
+        @endif
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <a href="{{ route('member.create') }}" class="btn btn-sm btn-pill btn-primary">Tambah Anggota</a>
+                <h1 class="h3 mb-2 text-primary font-weight-bold">Tabel Anggota</h1>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -22,22 +27,42 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Nomor HP</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Alamat</th>
+                            <th>Waktu Daftar</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                            <td>2011/01/25</td>
-                            <td>$112,000</td>
-                        </tr>
+                            @forelse($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->place_of_birth }}</td>
+                                    <td>{{ Carbon\Carbon::parse($user->birth_of_date)->isoFormat("D MMMM, YYYY") }}</td>
+                                    <td>{{ $user->phone_number }}</td>
+                                    <td>{{ $user->gender }}</td>
+                                    <td>{{ $user->address }}</td>
+                                    <td>{{ Carbon\Carbon::parse($user->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
+                                    <td>
+                                        <form action="{{ route('member.destroy', $user->id) }}" class="d-inline" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    Data kosong
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
