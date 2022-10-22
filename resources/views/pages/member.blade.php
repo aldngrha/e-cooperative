@@ -111,11 +111,11 @@
                                     <label class="form-label">Jenis Kelamin</label>
                                     <div class="custom-controls-stacked">
                                         <label class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" class="custom-control-input{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="M"{!! old('gender', Auth::user()->gender) == 'M' ? ' checked=""' : '' !!}>
+                                            <input type="radio" class="custom-control-input{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="Laki-Laki"{!! old('gender', Auth::user()->gender) == 'Laki-Laki' ? ' checked=""' : '' !!}>
                                             <span class="custom-control-label">Laki-laki</span>
                                         </label>
                                         <label class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" class="custom-control-input{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="F"{!! old('gender', Auth::user()->gender) == 'M' ? '' : ' checked=""' !!}>
+                                            <input type="radio" class="custom-control-input{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="Perempuan"{!! old('gender', Auth::user()->gender) == 'Laki-Laki' ? '' : ' checked=""' !!}>
                                             <span class="custom-control-label">Perempuan</span>
                                         </label>
                                     </div>
