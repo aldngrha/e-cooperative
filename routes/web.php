@@ -34,6 +34,7 @@ Route::prefix("admin")
         Route::get('/', [DashboardController::class, "index"])->name("dashboard");
         Route::resource("option", "OptionController");
         Route::resource("saving", "DepositController");
+        Route::resource("member", "MemberController");
 });
 
 Auth::routes();
