@@ -16,7 +16,6 @@ class CreateDepositsTable extends Migration
         Schema::create('deposits', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->integer("users_id");
-            $table->integer("option_id");
             $table->integer("amount_deposit");
             $table->string("description");
             $table->softDeletes();

@@ -19,6 +19,7 @@ class CreateLoansTable extends Migration
             $table->integer("amount_loan");
             $table->date("due_date");
             $table->string("description");
+            $table->string("status");
             $table->softDeletes();
             $table->timestamps();
         });
