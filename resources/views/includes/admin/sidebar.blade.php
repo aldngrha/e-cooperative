@@ -29,7 +29,7 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{ route("member.index") }}">
+    <a class="nav-link collapsed" href="">
       <i class="fas fa-fw fa-users"></i>
       <span>Anggota</span>
     </a>
@@ -45,16 +45,24 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+       aria-expanded="true" aria-controls="collapseTwo">
       <i class="fas fa-fw fa-wallet"></i>
-      <span>Simpanan</span>
+      <span>Pengajuan Simpanan</span>
     </a>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Simpanan</h6>
+              <a class="collapse-item" href="{{ route("saving.index") }}">Simpanan Pokok</a>
+              <a class="collapse-item" href="cards.html">Simpanan Wajib</a>
+          </div>
+      </div>
   </li>
   <!-- Nav Item - Charts -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#">
       <i class="fas fa-fw fa-dollar-sign"></i>
-      <span>Pinjaman</span>
+      <span>Pengajuan Pinjaman</span>
     </a>
   </li>
   <!-- Nav Item - Tables -->
@@ -66,6 +74,16 @@
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
+
+    <div class="sidebar-heading">
+        Option
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route("option.index") }}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Opsi</span></a>
+    </li>
 
   <!-- Sidebar Toggler (Sidebar) -->
   <div class="text-center d-none d-md-inline">

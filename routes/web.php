@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::prefix("admin")
     ->middleware(["auth", "admin"])
     ->group(function () {
         Route::get('/', [DashboardController::class, "index"])->name("dashboard");
-
+        Route::resource("option", "OptionController");
         Route::resource("saving", "SavingController");
 });
 
