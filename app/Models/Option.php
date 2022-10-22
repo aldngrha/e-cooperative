@@ -18,5 +18,4 @@ class Option extends Model
     public function loans() {
         return $this->hasOne(Loan::class, "option_id", "id");
     }
-
 }
