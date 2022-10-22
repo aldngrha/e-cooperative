@@ -49,19 +49,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function balances() {
-        return $this->hasOne(Saving::class, "users_id", "id");
-    }
-
     public function loans() {
         return $this->hasMany(Loan::class, "users_id", "id");
     }
 
-    public function withdraws() {
-        return $this->hasMany(Withdraw::class, "users_id", "id");
-    }
-
     public function deposits() {
         return $this->hasMany(Deposit::class, "users_id", "id");
+    }
+
+    public function depositMusts() {
+        return $this->hasMany(DepositMust::class, "users_id", "id");
     }
 }
