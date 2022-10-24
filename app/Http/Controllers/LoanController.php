@@ -20,10 +20,15 @@ class LoanController extends Controller
 
     public function process(LoanRequest $request) {
 
+        $option = Option::find(1)->time_period;
+
+        $due_date = Carbon::now()->addMonths($option);
+
         Loan::create([
             "users_id" => Auth::user()->id,
             "option_id" => 1,
             "amount_loan" => $request->input("amount_loan"),
+            "due_date" => $due_date,
             "description" => $request->input("description"),
             "status" => $request->input("status", "PENDING")
         ]);
