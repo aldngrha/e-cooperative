@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Deposit;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SavingController extends Controller
@@ -14,7 +16,10 @@ class SavingController extends Controller
      */
     public function index()
     {
-        //
+        $items = Deposit::with(["members"])->get();
+        return view("pages.admin.saving.index", [
+            "items" => $items,
+        ]);
     }
 
     /**
@@ -24,7 +29,7 @@ class SavingController extends Controller
      */
     public function create()
     {
-        //
+//        return view("pages.admin.saving.create");
     }
 
     /**
@@ -46,7 +51,12 @@ class SavingController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::with(["deposits"])->findOrFail($id);
+        $showSum = $user->deposits()->sum("amount_deposit");
+        return view("pages.admin.saving.saving-detail", [
+            "user" => $user,
+            "showSum" => $showSum
+        ]);
     }
 
     /**
