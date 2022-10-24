@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\DepositMustController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OptionController;
@@ -26,6 +27,8 @@ Route::middleware(["auth","user"])->group(function () {
     Route::post("/deposit", [DepositController::class, "process"])->name("checkout");
     Route::get("/deposit-must", [DepositMustController::class, "index"])->name("deposit-must");
     Route::post("/deposit-must", [DepositMustController::class, "process"])->name("checkout-must");
+    Route::get("/loan", [LoanController::class, "index"])->name("loan");
+    Route::post("/loan", [LoanController::class, "process"])->name("loan-process");
     Route::get("/profile/edit", [UserController::class, "edit"])->name("edit");
     Route::put("/profile/edit", [UserController::class, "update"])->name("update");
 });
@@ -36,7 +39,8 @@ Route::prefix("admin")
     ->group(function () {
         Route::get('/', [DashboardController::class, "index"])->name("dashboard");
         Route::resource("option", "OptionController");
-        Route::resource("saving", "DepositController");
+        Route::resource("saving", "SavingController");
+        Route::resource("saving-must", "SavingMustController");
         Route::resource("member", "MemberController");
 });
 
