@@ -54,7 +54,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Simpanan</h6>
               <a class="collapse-item" href="{{ route("saving.index") }}">Simpanan Pokok</a>
-              <a class="collapse-item" href="cards.html">Simpanan Wajib</a>
+              <a class="collapse-item" href="{{ route("saving-must.index") }}">Simpanan Wajib</a>
           </div>
       </div>
   </li>
