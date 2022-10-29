@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoanRequest;
+use App\Models\Loan;
+use App\Models\Option;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -14,7 +18,14 @@ class LoanController extends Controller
      */
     public function index()
     {
-        //
+        $items = Loan::with([
+            "members",
+            "options"
+        ])->get();
+
+        return view("pages.admin.loan.index", [
+            "items" => $items,
+        ]);
     }
 
     /**
@@ -46,7 +57,23 @@ class LoanController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::with(["loans"])->findOrFail($id);
+
+        $loan = Loan::with(["options"])->findOrFail($id);
+
+        $total = $user->loans()->sum("amount_loan");
+
+        $rate = ($total * $loan->options->interest_rate) / 100;
+
+        $total_rate = $rate + $total;
+
+        return view("pages.admin.loan.loan-detail", [
+            "user" => $user,
+            "loan" => $loan,
+            "total" => $total,
+            "rate" => $rate,
+            "total_rate" => $total_rate
+        ]);
     }
 
     /**
@@ -57,7 +84,11 @@ class LoanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $loan = Loan::findOrFail($id);
+
+        return view("pages.admin.loan.edit", [
+           "loan" => $loan
+        ]);
     }
 
     /**
@@ -67,9 +98,13 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LoanRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $loan = Loan::findOrFail($id);
+        $loan->update($data);
+
+        return redirect()->route("loan.index");
     }
 
     /**
