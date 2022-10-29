@@ -60,7 +60,7 @@
   </li>
   <!-- Nav Item - Charts -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#">
+    <a class="nav-link collapsed" href="{{ route("loan.index") }}">
       <i class="fas fa-fw fa-dollar-sign"></i>
       <span>Pengajuan Pinjaman</span>
     </a>
