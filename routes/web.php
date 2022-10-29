@@ -31,6 +31,8 @@ Route::middleware(["auth","user"])->group(function () {
     Route::post("/loan", [LoanController::class, "process"])->name("loan-process");
     Route::get("/profile/edit", [UserController::class, "edit"])->name("edit");
     Route::put("/profile/edit", [UserController::class, "update"])->name("update");
+    Route::get("/profile/saving", [UserController::class, "saving"])->name("saving");
+    Route::get("/profile/loan", [UserController::class, "loan"])->name("profile-loan");
 });
 
 Route::prefix("admin")
@@ -41,6 +43,7 @@ Route::prefix("admin")
         Route::resource("option", "OptionController");
         Route::resource("saving", "SavingController");
         Route::resource("saving-must", "SavingMustController");
+        Route::resource("loan", "LoanController");
         Route::resource("member", "MemberController");
 });
 
