@@ -26,11 +26,11 @@
           <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
           Profil Anggota
         </a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="{{ route("saving") }}">
               <i class="fas fa-wallet fa-sm fa-fw mr-2 text-gray-400"></i>
               Tabungan
           </a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="{{ route("profile-loan") }}">
               <i class="fas fa-dollar-sign fa-sm fa-fw mr-2 text-gray-400"></i>
               Pinjaman
           </a>
