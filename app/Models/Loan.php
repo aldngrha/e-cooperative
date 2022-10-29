@@ -16,7 +16,7 @@ class Loan extends Model
     protected $hidden = [];
 
     public function members() {
-        $this->belongsTo(User::class, "users_id", "id");
+        return $this->belongsTo(User::class, "users_id", "id");
     }
 
     public function options() {
