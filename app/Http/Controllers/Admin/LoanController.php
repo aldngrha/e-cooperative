@@ -58,13 +58,10 @@ class LoanController extends Controller
     public function show($id)
     {
         $user = User::with(["loans"])->findOrFail($id);
-
         $loan = Loan::with(["options"])->findOrFail($id);
 
         $total = $user->loans()->sum("amount_loan");
-
         $rate = ($total * $loan->options->interest_rate) / 100;
-
         $total_rate = $rate + $total;
 
         return view("pages.admin.loan.loan-detail", [
