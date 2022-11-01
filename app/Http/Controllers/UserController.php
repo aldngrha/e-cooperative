@@ -46,16 +46,20 @@ class UserController extends Controller
         $loan = Loan::with(["options"])->firstOrFail();
 
         $total = $user->loans()->sum("amount_loan");
+        $paid_off = $user->loans()->where("status", "LUNAS")->sum("amount_loan");
 
         $rate = ($total * $loan->options->interest_rate) / 100;
+        $rate_paid = ($paid_off * $loan->options->interest_rate) / 100;
 
-        $total_rate = $rate + $total;
+        $total_paid_off = $rate_paid + $paid_off;
+
+        $total_rate = $rate + $total - $total_paid_off;
 
         return view("pages.profile-loan", [
             "user" => $user,
-            "total" => $total,
+            "total" => $total - $paid_off,
             "loan" => $loan,
-            "rate" => $rate,
+            "rate" => $rate - $rate_paid,
             "total_rate" => $total_rate,
         ]);
     }
