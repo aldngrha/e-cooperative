@@ -24,7 +24,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Saldo Koperasi</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp40,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($total,0,".",".") }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-wallet fa-2x text-gray-300"></i>
@@ -41,8 +41,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Total Simpanan</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp215,000</div>
+                                    Total Simpanan Pokok</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($deposit,0,".",".") }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -58,11 +58,13 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Pinjaman
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Simpanan Wajib
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                            Rp {{ number_format($deposit_must,0,".",".") }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -81,11 +83,11 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Menunggu Disetujui</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                    Total Pinjaman Anggota</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($total_loan,0,".",".") }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-check fa-2x text-gray-300"></i>
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -127,15 +129,15 @@
                             <canvas id="myPieChart"></canvas>
                         </div>
                         <div class="mt-4 text-center small">
-                                  <span class="mr-2">
-                                      <i class="fas fa-circle text-primary"></i> Direct
-                                  </span>
+              <span class="mr-2">
+                  <i class="fas fa-circle text-secondary"></i> TERTUNDA
+              </span>
                             <span class="mr-2">
-                                      <i class="fas fa-circle text-success"></i> Social
-                                  </span>
+                  <i class="fas fa-circle text-success"></i> LUNAS
+              </span>
                             <span class="mr-2">
-                                      <i class="fas fa-circle text-info"></i> Referral
-                                  </span>
+                  <i class="fas fa-circle text-warning"></i> BELUM LUNAS
+              </span>
                         </div>
                     </div>
                 </div>
@@ -144,3 +146,5 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+
+
