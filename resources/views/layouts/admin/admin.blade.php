@@ -10,7 +10,9 @@
 
   <title>@yield('title')</title>
 
-  @include('includes.admin.style')
+    @stack("before-style")
+    @include('includes.admin.style')
+    @stack("after-style")
 
 </head>
 
@@ -74,7 +76,9 @@
   </div>
 </div>
 
+@stack("before-script")
 @include('includes.admin.script')
+@stack("after-script")
 </body>
 
 </html>
