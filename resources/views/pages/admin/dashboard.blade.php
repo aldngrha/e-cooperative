@@ -104,13 +104,38 @@
           <!-- Card Header - Dropdown -->
           <div
             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">10 Transaksi Saat Ini</h6>
+            <h6 class="m-0 font-weight-bold text-primary">5 Pinjaman Terakhir</h6>
           </div>
           <!-- Card Body -->
           <div class="card-body">
-            <div class="chart-area">
-              <canvas id="myAreaChart"></canvas>
-            </div>
+              <div class="table-responsive">
+                  <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="text-primary">
+                        <tr>
+                            <th>Nama Anggota</th>
+                            <th>Waktu Pengajuan</th>
+                            <th>Jumlah</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+{{--                        @forelse($users as $user)--}}
+{{--                            <tr>--}}
+{{--                                <td>{{ $user->name }}</td>--}}
+{{--                                <td>{{ $user->name }}</td>--}}
+{{--                                <td>{{ $user->name }}</td>--}}
+{{--                                <td>{{ $user->loans->status }}</td>--}}
+{{--                            </tr>--}}
+{{--                        @empty--}}
+{{--                            <tr>--}}
+{{--                                <td class="text-center" colspan="6">--}}
+{{--                                    Data tidak tersedia--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                        @endforelse--}}
+                    </tbody>
+                  </table>
+              </div>
           </div>
         </div>
       </div>
@@ -121,7 +146,7 @@
           <!-- Card Header - Dropdown -->
           <div
             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Cart Anggota</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Cart Peminjaman</h6>
           </div>
           <!-- Card Body -->
           <div class="card-body">
@@ -147,4 +172,38 @@
   <!-- /.container-fluid -->
 @endsection
 
+@push("after-script")
+    <script>
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["TERTUNDA", "LUNAS", "BELUM LUNAS"],
+                datasets: [{
+                    data: [{{ $pie["tertunda"] }}, {{ $pie["lunas"] }}, {{ $pie["belum_lunas"] }}],
+                    backgroundColor: ['#ffc107', '#42ba96', '#6c757d'],
+                    hoverBackgroundColor: ['#d19b01', '#2f8d70', '#474e53'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+    </script>
+@endpush
 
