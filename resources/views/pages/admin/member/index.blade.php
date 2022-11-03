@@ -26,6 +26,7 @@
                     <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
+                            <th>No</th>
                             <th>Name</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
@@ -39,6 +40,7 @@
                         <tbody>
                             @forelse($users as $user)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->place_of_birth }}</td>
                                     <td>{{ Carbon\Carbon::parse($user->birth_of_date)->isoFormat("D MMMM, YYYY") }}</td>

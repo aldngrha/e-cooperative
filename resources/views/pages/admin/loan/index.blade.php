@@ -20,6 +20,7 @@
                     <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Anggota</th>
                             <th>Waktu Pengajuan</th>
                             <th>Jumlah Pinjaman</th>
@@ -32,6 +33,7 @@
                         <tbody>
                         @forelse ($items as $item)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->members->name }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>Rp {{ number_format($item->amount_loan,0,".",".") }}</td>

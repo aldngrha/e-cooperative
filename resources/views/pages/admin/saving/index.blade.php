@@ -20,6 +20,7 @@
                     <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Anggota</th>
                             <th>Jumlah Simpan</th>
                             <th>Keterangan</th>
@@ -30,6 +31,7 @@
                         <tbody>
                         @forelse ($items as $item)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->members->name }}</td>
                                 <td>Rp {{ number_format($item->amount_deposit,0,".",".") }}</td>
                                 <td>{{ $item->description }}</td>
