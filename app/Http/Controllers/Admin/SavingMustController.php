@@ -16,7 +16,7 @@ class SavingMustController extends Controller
      */
     public function index()
     {
-        $items = DepositMust::with(["members"])->get();
+        $items = DepositMust::with(["members"])->orderBy("id", "DESC")->get();
         return view("pages.admin.saving-must.index", [
             "items" => $items,
         ]);

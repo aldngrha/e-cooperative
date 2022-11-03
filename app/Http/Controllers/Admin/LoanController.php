@@ -21,7 +21,7 @@ class LoanController extends Controller
         $items = Loan::with([
             "members",
             "options"
-        ])->get();
+        ])->orderBy("id", "DESC")->get();
 
         return view("pages.admin.loan.index", [
             "items" => $items,

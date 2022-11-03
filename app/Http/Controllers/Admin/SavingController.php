@@ -16,7 +16,7 @@ class SavingController extends Controller
      */
     public function index()
     {
-        $items = Deposit::with(["members"])->get();
+        $items = Deposit::with(["members"])->orderBy("id", "DESC")->get();
         return view("pages.admin.saving.index", [
             "items" => $items,
         ]);
