@@ -40,7 +40,6 @@
                                         <option value="TERTUNDA">TERTUNDA</option>
                                         <option value="BELUM LUNAS">BELUM LUNAS</option>
                                         <option value="LUNAS">LUNAS</option>
-                                        <option value="GAGAL">GAGAL</option>
                                     </select>
                                 </div>
                             </div>
