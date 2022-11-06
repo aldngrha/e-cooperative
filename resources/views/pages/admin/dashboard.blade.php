@@ -104,7 +104,7 @@
           <!-- Card Header - Dropdown -->
           <div
             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">5 Pinjaman Terakhir</h6>
+            <h6 class="m-0 font-weight-bold text-primary">10 Pinjaman Terakhir</h6>
           </div>
           <!-- Card Body -->
           <div class="card-body">
@@ -112,27 +112,44 @@
                   <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-primary">
                         <tr>
+                            <th>No</th>
                             <th>Nama Anggota</th>
                             <th>Waktu Pengajuan</th>
-                            <th>Jumlah</th>
+                            <th>Jumlah Pinjam</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-{{--                        @forelse($users as $user)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{ $user->name }}</td>--}}
-{{--                                <td>{{ $user->name }}</td>--}}
-{{--                                <td>{{ $user->name }}</td>--}}
-{{--                                <td>{{ $user->loans->status }}</td>--}}
-{{--                            </tr>--}}
-{{--                        @empty--}}
-{{--                            <tr>--}}
-{{--                                <td class="text-center" colspan="6">--}}
-{{--                                    Data tidak tersedia--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforelse--}}
+                        @forelse($loans as $loan)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $loan->members->name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($loan->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
+                                <td>Rp {{ number_format($loan->amount_loan,0,".",".") }}</td>
+                                <td>
+                                    @if ($loan->status == "TERTUNDA")
+                                        <span class="p-2 badge badge-secondary">
+                                    @elseif ($loan->status == "BELUM LUNAS")
+                                                <span class="p-2 badge badge-warning">
+                                    @elseif ($loan->status == "LUNAS")
+                                                        <span class="p-2 badge badge-success">
+                                    @elseif ($loan->status == "GAGAL")
+                                                                <span class="p-2 badge badge-danger">
+                                    @endif
+                                                                    {{ $loan->status }}
+                                        </span>
+                                        </span>
+                                        </span>
+                                        </span>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-center" colspan="6">
+                                    Data tidak tersedia
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                   </table>
               </div>
@@ -181,8 +198,8 @@
                 labels: ["TERTUNDA", "LUNAS", "BELUM LUNAS"],
                 datasets: [{
                     data: [{{ $pie["tertunda"] }}, {{ $pie["lunas"] }}, {{ $pie["belum_lunas"] }}],
-                    backgroundColor: ['#ffc107', '#42ba96', '#6c757d'],
-                    hoverBackgroundColor: ['#d19b01', '#2f8d70', '#474e53'],
+                    backgroundColor: ['#6c757d', '#42ba96', '#ffc107',],
+                    hoverBackgroundColor: ['#474e53', '#2f8d70', '#d19b01',],
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
                 }],
             },
