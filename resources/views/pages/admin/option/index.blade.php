@@ -24,7 +24,7 @@
                         <thead>
                             <tr>
                                 <th>Bunga (%)</th>
-                                <th>Lama Pinjam</th>
+                                <th>Lama Pinjam (dalam bulan)</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
