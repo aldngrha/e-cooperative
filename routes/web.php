@@ -7,7 +7,9 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\DepositMustController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\ChangePasswordUserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\OptionController;
 
 /*
@@ -33,6 +35,8 @@ Route::middleware(["auth","user"])->group(function () {
     Route::put("/profile/edit", [UserController::class, "update"])->name("update");
     Route::get("/profile/saving", [UserController::class, "saving"])->name("saving");
     Route::get("/profile/loan", [UserController::class, "loan"])->name("profile-loan");
+    Route::get("/profile/change-password", [ChangePasswordUserController::class, "edit"])->name("password-edit");
+    Route::post("/profile/change-password", [ChangePasswordUserController::class, "changePassword"])->name("change");
 });
 
 Route::prefix("admin")
@@ -40,6 +44,8 @@ Route::prefix("admin")
     ->middleware(["auth", "admin"])
     ->group(function () {
         Route::get('/', [DashboardController::class, "index"])->name("dashboard");
+        Route::get("/change-password", [ChangePasswordController::class, "edit"])->name("edit-password");
+        Route::post("/change-password", [ChangePasswordController::class, "changePasswordPost"])->name("change-password");
         Route::resource("option", "OptionController");
         Route::resource("saving", "SavingController");
         Route::resource("saving-must", "SavingMustController");
