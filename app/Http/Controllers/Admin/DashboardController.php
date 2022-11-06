@@ -16,11 +16,7 @@ class DashboardController extends Controller
         $deposit = Deposit::all();
         $depositMust = DepositMust::all();
         $loan = Loan::with(["options"])->firstOrFail();
-        $users = User::with([
-            "deposits",
-            "depositMusts",
-            "loans"
-        ])->orderBy("created_at", "DESC")->take(10)->get();
+        $loans = Loan::with(["members"])->orderBy("id", "DESC")->take(10)->get();
 
         $amount_deposit = $deposit->sum("amount_deposit");
         $amount_deposit_must = $depositMust->sum("amount_deposit");
@@ -43,7 +39,7 @@ class DashboardController extends Controller
             "deposit" => $amount_deposit,
             "deposit_must" => $amount_deposit_must,
             "total_loan" => $total_loan,
-            "users" => $users,
+            "loans" => $loans,
             "pie" => $pie,
         ]);
     }
