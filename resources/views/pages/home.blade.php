@@ -104,24 +104,66 @@
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">10 Transaksi Saat Ini</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">10 Pinjaman Terakhir</h6>
                     </div>
-                    <!-- Card Body -->
                     <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="myAreaChart"></canvas>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
+                                <thead class="text-primary">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Anggota</th>
+                                    <th>Waktu Pengajuan</th>
+                                    <th>Jumlah Pinjam</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($loans as $loan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $loan->members->name }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($loan->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
+                                        <td>Rp {{ number_format($loan->amount_loan,0,".",".") }}</td>
+                                        <td>
+                                            @if ($loan->status == "TERTUNDA")
+                                                <span class="p-2 badge badge-secondary">
+                                    @elseif ($loan->status == "BELUM LUNAS")
+                                                        <span class="p-2 badge badge-warning">
+                                    @elseif ($loan->status == "LUNAS")
+                                                                <span class="p-2 badge badge-success">
+                                    @elseif ($loan->status == "GAGAL")
+                                                                        <span class="p-2 badge badge-danger">
+                                    @endif
+                                                                            {{ $loan->status }}
+                                        </span>
+                                        </span>
+                                        </span>
+                                        </span>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="6">
+                                            Data tidak tersedia
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Pie Chart -->
+            <!-- Pie Chart -->
             <div class="col-xl-4 col-lg-5">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Cart Anggota</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Cart Peminjaman</h6>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -146,5 +188,40 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+
+@push("after-script")
+    <script>
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["TERTUNDA", "LUNAS", "BELUM LUNAS"],
+                datasets: [{
+                    data: [{{ $pie["tertunda"] }}, {{ $pie["lunas"] }}, {{ $pie["belum_lunas"] }}],
+                    backgroundColor: ['#6c757d', '#42ba96', '#ffc107',],
+                    hoverBackgroundColor: ['#474e53', '#2f8d70', '#d19b01',],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+    </script>
+@endpush
 
 
