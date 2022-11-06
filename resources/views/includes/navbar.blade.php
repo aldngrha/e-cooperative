@@ -34,7 +34,7 @@
               <i class="fas fa-dollar-sign fa-sm fa-fw mr-2 text-gray-400"></i>
               Pinjaman
           </a>
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" href="{{ route("password-edit") }}">
           <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
           Settings
         </a>
