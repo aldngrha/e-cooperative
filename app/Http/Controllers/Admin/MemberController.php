@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -71,7 +72,7 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         //
     }
@@ -85,6 +86,9 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        $user->deposits()->delete();
+        $user->depositMusts()->delete();
+        $user->loans()->delete();
         $user->delete();
 
         return back()->with("message", "Anggota telah dihapus");
