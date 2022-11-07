@@ -157,7 +157,6 @@
             </div>
 
             <!-- Pie Chart -->
-            <!-- Pie Chart -->
             <div class="col-xl-4 col-lg-5">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
@@ -171,15 +170,15 @@
                             <canvas id="myPieChart"></canvas>
                         </div>
                         <div class="mt-4 text-center small">
-              <span class="mr-2">
-                  <i class="fas fa-circle text-secondary"></i> TERTUNDA
-              </span>
                             <span class="mr-2">
-                  <i class="fas fa-circle text-success"></i> LUNAS
-              </span>
+                                <i class="fas fa-circle text-secondary"></i> TERTUNDA
+                            </span>
                             <span class="mr-2">
-                  <i class="fas fa-circle text-warning"></i> BELUM LUNAS
-              </span>
+                                <i class="fas fa-circle text-success"></i> LUNAS
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-warning"></i> BELUM LUNAS
+                            </span>
                         </div>
                     </div>
                 </div>
