@@ -43,13 +43,14 @@ class UserController extends Controller
             "loans"
         ])->where("id", Auth::user()->id)->firstOrFail();
 
-        $loan = Loan::with(["options"])->firstOrFail();
+        $loan = Loan::all();
+        $option = Option::firstOrFail();
 
         $total = $user->loans()->sum("amount_loan");
         $paid_off = $user->loans()->where("status", "LUNAS")->sum("amount_loan");
 
-        $rate = ($total * $loan->options->interest_rate) / 100;
-        $rate_paid = ($paid_off * $loan->options->interest_rate) / 100;
+        $rate = ($total * $option->interest_rate) / 100;
+        $rate_paid = ($paid_off * $option->interest_rate) / 100;
 
         $total_paid_off = $rate_paid + $paid_off;
 
@@ -61,6 +62,7 @@ class UserController extends Controller
             "loan" => $loan,
             "rate" => $rate - $rate_paid,
             "total_rate" => $total_rate,
+            "option" => $option
         ]);
     }
 }
