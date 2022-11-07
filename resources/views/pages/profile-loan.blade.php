@@ -37,7 +37,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>Bunga ({{ $loan->options->interest_rate }}%)</th>
+                            <th>Bunga ({{ $option->interest_rate }}%)</th>
                             <td>Rp {{ number_format($rate,0,".",".") }}</td>
                         </tr>
                         <tr>
