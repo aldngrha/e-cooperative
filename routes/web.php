@@ -51,6 +51,7 @@ Route::prefix("admin")
         Route::post("/change-password", [ChangePasswordController::class, "changePasswordPost"])->name("change-password");
         Route::resource("option", "OptionController");
         Route::resource("saving", "SavingController");
+        Route::resource("saving-voluntary", "SavingVoluntaryController");
         Route::resource("saving-must", "SavingMustController");
         Route::resource("loan", "LoanController");
         Route::resource("member", "MemberController");
