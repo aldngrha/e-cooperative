@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function depositMusts() {
         return $this->hasMany(DepositMust::class, "users_id", "id");
     }
+
+    public function installments(){
+        return $this->hasMany(Installment::class, "users_id", "id");
+    }
 }
