@@ -40,13 +40,6 @@
                                     <a href="{{ route('saving-must.show', $item->members->id) }}" class="btn btn-info">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <form action="{{ route('option.destroy', $item->id) }}" class="d-inline" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                         @empty
