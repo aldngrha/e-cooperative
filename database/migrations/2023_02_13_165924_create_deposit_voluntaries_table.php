@@ -16,7 +16,7 @@ class CreateDepositVoluntariesTable extends Migration
         Schema::create('deposit_voluntaries', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->integer("users_id");
-            $table->integer("amount_deposit");
+            $table->integer("amount_deposit")->nullable();
             $table->string("description");
             $table->softDeletes();
             $table->timestamps();

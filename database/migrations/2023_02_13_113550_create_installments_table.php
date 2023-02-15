@@ -17,6 +17,8 @@ class CreateInstallmentsTable extends Migration
             $table->bigIncrements("id");
             $table->integer("users_id");
             $table->integer("installment_number");
+            $table->integer("amount_installment")->nullable();
+            $table->integer("interest_rate")->nullable();
             $table->string("description");
             $table->timestamps();
             $table->softDeletes();
