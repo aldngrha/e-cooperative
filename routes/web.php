@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\DepositMustController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\InstallmentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\ChangePasswordUserController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -31,6 +32,8 @@ Route::middleware(["auth","user"])->group(function () {
     Route::post("/deposit-must", [DepositMustController::class, "process"])->name("checkout-must");
     Route::get("/loan", [LoanController::class, "index"])->name("loan");
     Route::post("/loan", [LoanController::class, "process"])->name("loan-process");
+    Route::get("/installment", [InstallmentController::class, "index"])->name("installment");
+    Route::post("/installment", [InstallmentController::class, "create"])->name("installment-checkout");
     Route::get("/profile/edit", [UserController::class, "edit"])->name("edit");
     Route::put("/profile/edit", [UserController::class, "update"])->name("update");
     Route::get("/profile/saving", [UserController::class, "saving"])->name("saving");

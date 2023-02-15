@@ -52,7 +52,7 @@
   </li>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="{{url("backend/tables.html")}}">
+    <a class="nav-link" href="{{route("installment")}}">
       <i class="fas fa-fw fa-money-bill-wave"></i>
       <span>Angsuran</span></a>
   </li>
