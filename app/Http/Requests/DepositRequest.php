@@ -25,7 +25,7 @@ class DepositRequest extends FormRequest
     {
         return [
             "users_id" => "integer",
-            "amount_deposit" => "required|integer",
+            "amount_deposit" => "integer",
             "description" => "required"
         ];
     }

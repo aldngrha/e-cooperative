@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DepositController extends Controller
 {
-    public function index(Request $request) {;
+    public function index(Request $request) {
         return view("pages.deposit");
     }
 
@@ -18,7 +18,6 @@ class DepositController extends Controller
 
         DepositVoluntary::create([
             "users_id" => Auth::user()->id,
-            "amount_deposit" => $request->input("amount_deposit"),
             "description" => $request->input("description")
         ]);
 

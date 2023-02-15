@@ -17,7 +17,6 @@ class DepositMustController extends Controller
 
         DepositMust::create([
             "users_id" => Auth::user()->id,
-            "amount_deposit" => $request->input("amount_deposit"),
             "description" => $request->input("description")
         ]);
 
