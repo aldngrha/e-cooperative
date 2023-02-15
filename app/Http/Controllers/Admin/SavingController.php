@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Deposit;
+use App\Models\DepositVoluntary;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class SavingController extends Controller
      */
     public function index()
     {
-        $items = Deposit::with(["members"])->orderBy("id", "DESC")->get();
+        $items = DepositVoluntary::with(["members"])->orderBy("id", "DESC")->get();
         return view("pages.admin.saving.index", [
             "items" => $items,
         ]);

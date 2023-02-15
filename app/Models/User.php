@@ -20,7 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        "username",
+        "member_number",
         'email',
         'password',
         "place_of_birth",
@@ -29,6 +29,7 @@ class User extends Authenticatable
         "gender",
         "position",
         "address",
+        "amount_deposit"
     ];
 
     /**
@@ -54,8 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Loan::class, "users_id", "id");
     }
 
-    public function deposits() {
-        return $this->hasMany(Deposit::class, "users_id", "id");
+    public function depositVoluntaries() {
+        return $this->hasMany(DepositVoluntary::class, "users_id", "id");
     }
 
     public function depositMusts() {

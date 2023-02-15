@@ -16,7 +16,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy("id", "DESC")->get();
+        $users = User::orderBy("member_number", "DESC")->get();
         return view("pages.admin.member.index", [
             "users" => $users
         ]);

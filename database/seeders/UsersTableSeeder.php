@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table("users")->insert([
             "name" => "admin",
+            "member_number" => "000",
             "email" => "ekoperasi@gmail.com",
             "password" => bcrypt("adminkoperasi"),
             "created_at" => now(),
@@ -24,6 +25,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table("users")->insert([
             "name" => "user",
+            "member_number" => "001",
             "email" => "user@gmail.com",
             "password" => bcrypt("userkoperasi"),
             "place_of_birth" => "bandar lampung",
@@ -34,6 +36,7 @@ class UsersTableSeeder extends Seeder
             "address" => "jl dr jarusn 1 jahsjha",
             "created_at" => now(),
             "roles" => "USER",
+            "amount_deposit" => 2000000
         ]);
     }
 }

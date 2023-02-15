@@ -45,6 +45,26 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Simpanan Pokok') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text">Rp</span>
+                                        </span>
+                                        <input id="amount_deposit" type="number"
+                                               class="form-control @error('amount_deposit') is-invalid @enderror" name="amount_deposit"
+                                               value="{{ old('amount_deposit') }}" required autocomplete="amount_deposit" autofocus>
+                                        @error('amount_deposit')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label for="password"
                                        class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 

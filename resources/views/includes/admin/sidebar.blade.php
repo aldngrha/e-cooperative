@@ -53,7 +53,7 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Simpanan</h6>
-              <a class="collapse-item" href="{{ route("saving.index") }}">Simpanan Pokok</a>
+              <a class="collapse-item" href="{{ route("saving.index") }}">Simpanan Sukarela</a>
               <a class="collapse-item" href="{{ route("saving-must.index") }}">Simpanan Wajib</a>
           </div>
       </div>
@@ -67,10 +67,31 @@
   </li>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="{{url("backend/tables.html")}}">
+    <a class="nav-link" href="">
+      <i class="fas fa-fw fa-file-pdf"></i>
+      <span>Angsuran</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="">
+      <i class="fas fa-fw fa-file-pdf"></i>
+      <span>Modal Koperasi</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="">
+      <i class="fas fa-fw fa-file-pdf"></i>
+      <span>Pengeluaran</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="">
+      <i class="fas fa-fw fa-file-pdf"></i>
+      <span>Sisa Hasil Usaha (SHU)</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="">
       <i class="fas fa-fw fa-file-pdf"></i>
       <span>Laporan</span></a>
   </li>
+
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

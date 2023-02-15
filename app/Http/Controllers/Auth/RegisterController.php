@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'amount_deposit' => ["required", 'integer'],
         ]);
     }
 
@@ -64,10 +65,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $data["member_number"] = str_pad(User::count(), 3, 0, STR_PAD_LEFT);
+
         return User::create([
             'name' => $data['name'],
+            'member_number' => $data['member_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'amount_deposit' => $data["amount_deposit"]
         ]);
     }
 }

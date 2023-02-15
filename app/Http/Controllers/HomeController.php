@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Deposit;
+use App\Models\DepositVoluntary;
 use App\Models\DepositMust;
 use App\Models\Loan;
 use App\Models\Option;
@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $deposit = Deposit::all();
+        $deposit = DepositVoluntary::all();
         $depositMust = DepositMust::all();
         $loan = Loan::all();
         $option = Option::firstOrFail();

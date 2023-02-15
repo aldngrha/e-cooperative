@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Deposit;
+use App\Models\DepositVoluntary;
 use App\Models\DepositMust;
 use App\Models\Loan;
 use App\Models\Option;
@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function index(Request $request) {
 
-        $deposit = Deposit::all();
+        $deposit = DepositVoluntary::all();
         $depositMust = DepositMust::all();
         $loan = Loan::all();
         $option = Option::firstOrFail();

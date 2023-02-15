@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use App\Models\Deposit;
+use App\Models\DepositVoluntary;
 use App\Models\Loan;
 use App\Models\Option;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,16 +25,16 @@ class UserController extends Controller
 
     public function saving() {
         $user = User::with([
-            "deposits",
+            "depositVoluntaries",
             "depositMusts",
         ])->where("id", Auth::user()->id)->firstOrFail();
 
-        $showSum = $user->deposits()->sum("amount_deposit");
+        $showSumVoluntary = $user->depositVoluntaries()->sum("amount_deposit");
         $showSumMust = $user->depositMusts()->sum("amount_deposit");
 
         return view("pages.saving", [
             "user" => $user,
-            "showSum" => $showSum,
+            "showSumVoluntary" => $showSumVoluntary,
             "showSumMust" => $showSumMust,
         ]);
     }
@@ -43,7 +44,11 @@ class UserController extends Controller
             "loans"
         ])->where("id", Auth::user()->id)->firstOrFail();
 
-        $loan = Loan::all();
+
+        $due_date = $user->loans()->pluck("due_date")->map(function ($date) {
+            return Carbon::parse($date)->isoFormat("dddd, D MMMM YYYY");
+        })[0];
+
         $option = Option::firstOrFail();
 
         $total = $user->loans()->sum("amount_loan");
@@ -56,13 +61,22 @@ class UserController extends Controller
 
         $total_rate = $rate + $total - $total_paid_off;
 
+        $installment = $total_rate;
+
+        if ($installment > 0) {
+            $result = $installment / $option->time_period;
+        } else {
+            $result = $installment;
+        }
+
         return view("pages.profile-loan", [
             "user" => $user,
             "total" => $total - $paid_off,
-            "loan" => $loan,
+            "due_date" => $due_date,
             "rate" => $rate - $rate_paid,
             "total_rate" => $total_rate,
-            "option" => $option
+            "result" => $result,
+            "option" => $option,
         ]);
     }
 }

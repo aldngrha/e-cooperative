@@ -37,7 +37,7 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Simpanan</h6>
-              <a class="collapse-item" href="{{ route("deposit") }}">Simpanan Pokok</a>
+              <a class="collapse-item" href="{{ route("deposit") }}">Simpanan Sukarela</a>
               <a class="collapse-item" href="{{ route("deposit-must") }}">Simpanan Wajib</a>
           </div>
       </div>
@@ -51,6 +51,16 @@
 
   </li>
   <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="{{url("backend/tables.html")}}">
+      <i class="fas fa-fw fa-money-bill-wave"></i>
+      <span>Angsuran</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url("backend/tables.html")}}">
+      <i class="fas fa-fw fa-money-bill"></i>
+      <span>Penarikan Sisa Hasil Usaha</span></a>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url("backend/tables.html")}}">
       <i class="fas fa-fw fa-file-pdf"></i>

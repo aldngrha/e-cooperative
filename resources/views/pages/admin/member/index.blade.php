@@ -27,6 +27,7 @@
                         <thead>
                         <tr>
                             <th>No</th>
+                            <th>Kode Anggota</th>
                             <th>Name</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
@@ -41,6 +42,7 @@
                             @forelse($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->member_number }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->place_of_birth }}</td>
                                     <td>{{ Carbon\Carbon::parse($user->birth_of_date)->isoFormat("D MMMM, YYYY") }}</td>

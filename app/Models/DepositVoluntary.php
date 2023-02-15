@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Deposit extends Model
+class DepositVoluntary extends Model
 {
     use HasFactory;
     use SoftDeletes;

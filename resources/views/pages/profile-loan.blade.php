@@ -19,6 +19,10 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
                         <tr>
+                            <th>Kode Anggota</th>
+                            <td>{{ $user->member_number }}</td>
+                        </tr>
+                        <tr>
                             <th>Nama Anggota</th>
                             <td>{{ $user->name }}</td>
                         </tr>
@@ -31,18 +35,38 @@
                             <td>{{ $user->place_of_birth }}, {{ \Carbon\Carbon::parse($user->date_of_birth)->isoFormat("D MMMM YYYY") }}</td>
                         </tr>
                         <tr>
-                            <th>Total Pinjaman</th>
-                            <td>
+                            <th>Nomor Handphone</th>
+                            <td>{{ $user->phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Jabatan</th>
+                            <td>{{ $user->position }}</td>
+                        </tr>
+                        <tr>
+                            <th>Alamat</th>
+                            <td>{{ $user->address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Jatuh Tempo</th>
+                            <td>{{ $due_date }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-primary font-weight-light">Total Pinjaman</th>
+                            <td class="text-primary">
                                 Rp {{ number_format($total,0,".",".") }}
                             </td>
                         </tr>
                         <tr>
-                            <th>Bunga ({{ $option->interest_rate }}%)</th>
-                            <td>Rp {{ number_format($rate,0,".",".") }}</td>
+                            <th class="text-primary font-weight-light">Bunga ({{ $option->interest_rate }}%)</th>
+                            <td class="text-primary">Rp {{ number_format($rate,0,".",".") }}</td>
                         </tr>
                         <tr>
                             <th class="text-primary">Total Bayar</th>
-                            <td class="text-primary">Rp {{ number_format($total_rate,0,".",".") }}</td>
+                            <td class="text-primary font-weight-bold">Rp {{ number_format($total_rate,0,".",".") }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-primary">Angsuran perbulan (selama {{ $option->time_period }} bulan)</th>
+                            <td class="text-primary font-weight-bold">Rp {{ number_format($result,0,".",".") }}</td>
                         </tr>
                     </table>
                 </div>
