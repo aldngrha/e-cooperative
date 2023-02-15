@@ -22,7 +22,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Anggota</th>
-                            <th>Jumlah Simpan</th>
+                            <th>Jumlah Simpanan Pokok</th>
                             <th>Keterangan</th>
                             <th>Waktu Pengajuan</th>
                             <th>Action</th>
@@ -32,21 +32,14 @@
                         @forelse ($items as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->members->name }}</td>
+                                <td>{{ $item->name }}</td>
                                 <td>Rp {{ number_format($item->amount_deposit,0,".",".") }}</td>
                                 <td>{{ $item->description }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>
-                                    <a href="{{ route('saving.show', $item->members->id) }}" class="btn btn-info">
+                                    <a href="{{ route('saving.show', $item->id) }}" class="btn btn-info">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <form action="{{ route('option.destroy', $item->id) }}" class="d-inline" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                         @empty

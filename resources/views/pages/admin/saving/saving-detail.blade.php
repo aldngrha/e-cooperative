@@ -32,7 +32,7 @@
                         </tr>
                         <tr>
                             <th>Total Simpanan Pokok</th>
-                            <td>Rp {{ number_format($showSum,0,".",".") }}</td>
+                            <td>Rp {{ number_format($user->amount_deposit,0,".",".") }}</td>
                         </tr>
                     </table>
                 </div>
