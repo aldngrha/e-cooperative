@@ -41,13 +41,13 @@ class UserController extends Controller
 
     public function loan() {
         $user = User::with([
-            "loans"
+            "loans",
+            "installments"
         ])->where("id", Auth::user()->id)->firstOrFail();
-
 
         $due_date = $user->loans()->pluck("due_date")->map(function ($date) {
             return Carbon::parse($date)->isoFormat("dddd, D MMMM YYYY");
-        })[0];
+        });
 
         $option = Option::firstOrFail();
 
@@ -63,6 +63,14 @@ class UserController extends Controller
 
         $installment = $total_rate;
 
+        $installment_number = $user->installments->count() + 1;
+
+        $total_installment = $user->installments->sum("amount_installment");
+
+        $total_interest = $user->installments->sum("interest_rate");
+
+        $remaining  = $total_rate - ($total_installment + $total_interest);
+
         if ($installment > 0) {
             $result = $installment / $option->time_period;
         } else {
@@ -76,6 +84,8 @@ class UserController extends Controller
             "rate" => $rate - $rate_paid,
             "total_rate" => $total_rate,
             "result" => $result,
+            "installment_number" => $installment_number,
+            "remaining" => $remaining,
             "option" => $option,
         ]);
     }

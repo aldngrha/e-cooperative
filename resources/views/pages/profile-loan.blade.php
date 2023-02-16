@@ -48,7 +48,11 @@
                         </tr>
                         <tr>
                             <th>Tanggal Jatuh Tempo</th>
-                            <td>{{ $due_date }}</td>
+                            @if(isset($due_date[0]))
+                                <td>{{ $due_date[0] }}</td>
+                            @else
+                                <td>Tidak ada pinjaman</td>
+                            @endif
                         </tr>
                         <tr>
                             <th class="text-primary font-weight-light">Total Pinjaman</th>
@@ -61,12 +65,20 @@
                             <td class="text-primary">Rp {{ number_format($rate,0,".",".") }}</td>
                         </tr>
                         <tr>
+                            <th class="text-primary font-weight-light">Angsuran perbulan (selama {{ $option->time_period }} bulan)</th>
+                            <td class="text-primary">Rp {{ number_format($result,0,".",".") }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-primary font-weight-light">Angsuran ke</th>
+                            <td class="text-primary">{{ $installment_number }}</td>
+                        </tr>
+                        <tr>
                             <th class="text-primary">Total Bayar</th>
                             <td class="text-primary font-weight-bold">Rp {{ number_format($total_rate,0,".",".") }}</td>
                         </tr>
                         <tr>
-                            <th class="text-primary">Angsuran perbulan (selama {{ $option->time_period }} bulan)</th>
-                            <td class="text-primary font-weight-bold">Rp {{ number_format($result,0,".",".") }}</td>
+                            <th class="text-primary">Sisa Bayar</th>
+                            <td class="text-primary font-weight-bold">Rp {{ number_format($remaining,0,".",".") }}</td>
                         </tr>
                     </table>
                 </div>

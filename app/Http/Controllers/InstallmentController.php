@@ -41,17 +41,11 @@ class InstallmentController extends Controller
             ->where("id", Auth::user()->id)
             ->firstOrFail();
 
-//        $option = Option::find(1)->time_period;
-//
-//        if ($user->installments->count() >= $option) {
-//            return redirect()->back()->withErrors(['error' => 'Anda sudah mencapai batas maksimal angsuran']);
-//        }
-
         $loan = User::with(["loans"])
             ->where("id", Auth::user()->id)
             ->firstOrFail();
 
-        $amount = $user->loans->sum("amount_loan");
+        $amount = $loan->loans->sum("amount_loan");
 
         if ($amount == 0) {
             return back()->with("error", "Kamu belum memiliki pinjaman");

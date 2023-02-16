@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoanRequest;
 use App\Models\Loan;
 use App\Models\Option;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,16 @@ class LoanController extends Controller
 
     public function process(LoanRequest $request) {
 
+        $user = User::with(["loans"])
+            ->where("id", Auth::user()->id)
+            ->firstOrFail();
+
         $option = Option::find(1)->time_period;
         $due_date = Carbon::now()->addMonths($option);
+
+        if($user->loans->whereIn("status", ["TERTUNDA", "BELUM LUNAS"])->count() > 0) {
+            return back()->with("error", "Pinjaman anda sebelumnya, belum disetujui atau belum lunas");
+        }
 
         Loan::create([
             "users_id" => Auth::user()->id,

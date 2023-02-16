@@ -24,6 +24,10 @@
             <div class="alert alert-success">
                 <p>{{  session()->get("message") }}</p>
             </div>
+        @elseif(session()->has("error"))
+            <div class="alert alert-danger">
+                <p>{{  session()->get("error") }}</p>
+            </div>
         @endif
 
         <div class="card shadow">
