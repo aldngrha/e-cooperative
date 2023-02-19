@@ -62,13 +62,13 @@
                                     <a href="{{ route('loan.edit', $item->id) }}" class="btn btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <form action="{{ route('option.destroy', $item->id) }}" class="d-inline" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+{{--                                    <form action="{{ route('option.destroy', $item->id) }}" class="d-inline" method="POST">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('delete')--}}
+{{--                                        <button class="btn btn-danger">--}}
+{{--                                            <i class="fas fa-trash"></i>--}}
+{{--                                        </button>--}}
+{{--                                    </form>--}}
                                 </td>
                             </tr>
                         @empty

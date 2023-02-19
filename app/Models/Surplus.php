@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Installment extends Model
+class Surplus extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["users_id", "loans_id","installment_number", "amount_installment", "interest_rate", "description"];
+    protected $fillable = ["users_id", "withdraw", "status"];
 
     protected $hidden = [];
 
-    public function loans() {
-        $this->belongsTo(Loan::class, "loans_id", "id");
+    public function members() {
+        return $this->belongsTo(User::class, "users_id", "id");
     }
+
 }

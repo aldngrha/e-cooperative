@@ -63,7 +63,7 @@ class User extends Authenticatable
         return $this->hasMany(DepositMust::class, "users_id", "id");
     }
 
-    public function installments(){
-        return $this->hasMany(Installment::class, "users_id", "id");
+    public function surpluses(){
+        return $this->hasMany(Surplus::class, "users_id", "id");
     }
 }

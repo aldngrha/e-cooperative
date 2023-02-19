@@ -15,12 +15,14 @@ class CreateSurplusesTable extends Migration
     {
         Schema::create('surpluses', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->string("member_profit");
-            $table->string("cooperative_profit");
+            $table->integer("users_id");
+            $table->integer("withdraw");
             $table->string("status");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
+
 
     /**
      * Reverse the migrations.

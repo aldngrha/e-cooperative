@@ -17,6 +17,7 @@ class CreateLoansTable extends Migration
             $table->bigIncrements("id");
             $table->integer("users_id");
             $table->integer("option_id");
+            $table->string("loan_code")->unique();
             $table->integer("amount_loan");
             $table->date("due_date")->nullable();
             $table->string("description");

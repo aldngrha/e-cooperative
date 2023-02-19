@@ -26,10 +26,11 @@ class LoanRequest extends FormRequest
         return [
             "users_id" => "integer",
             "option_id" => "integer",
+            "loan_code" => "string",
             "amount_loan" => "integer",
             "due_date" => "date",
             "description" => "string",
-            "status" => "string|in:TERTUNDA,GAGAL,BELUM LUNAS,LUNAS"
+            "status" => "string|in:TERTUNDA,TIDAK DISETUJUI,BELUM LUNAS,LUNAS"
         ];
     }
 }

@@ -11,7 +11,7 @@ class Loan extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["users_id", "option_id", "amount_loan", "due_date", "description", "status"];
+    protected $fillable = ["users_id", "option_id", "loan_code", "amount_loan", "due_date", "description", "status"];
 
     protected $hidden = [];
 
@@ -21,5 +21,9 @@ class Loan extends Model
 
     public function options() {
         return $this->belongsTo(Option::class, "option_id", "id");
+    }
+
+    public function installments() {
+        return $this->hasMany(Installment::class, "loans_id", "id");
     }
 }

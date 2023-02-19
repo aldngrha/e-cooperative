@@ -15,7 +15,7 @@ class CreateInstallmentsTable extends Migration
     {
         Schema::create('installments', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->integer("users_id");
+            $table->integer("loans_id");
             $table->integer("installment_number");
             $table->integer("amount_installment")->nullable();
             $table->integer("interest_rate")->nullable();

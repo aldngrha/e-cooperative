@@ -25,6 +25,15 @@ class LoanController extends Controller
             ->where("id", Auth::user()->id)
             ->firstOrFail();
 
+        // generate random string of 4 digits
+        $random_number = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+
+        // get the first 3 characters of the user's name
+        $user_name = substr(str_replace(' ', '', strtoupper(Auth::user()->name)), 0, 3);
+
+        // combine the user's name with the random number
+        $loan_code = $user_name . $random_number;
+
         $option = Option::find(1)->time_period;
         $due_date = Carbon::now()->addMonths($option);
 
@@ -35,6 +44,7 @@ class LoanController extends Controller
         Loan::create([
             "users_id" => Auth::user()->id,
             "option_id" => 1,
+            "loan_code" => $loan_code,
             "amount_loan" => $request->input("amount_loan"),
             "due_date" => $due_date,
             "description" => $request->input("description"),

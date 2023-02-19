@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InstallmentRequest extends FormRequest
+class SurplusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class InstallmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +24,7 @@ class InstallmentRequest extends FormRequest
     public function rules()
     {
         return [
-            "loans_id" => "integer|exists:loans,id",
-            "installment_number" => "integer",
-            "amount_installment" => "integer",
-            "interest_rate" => "integer",
-            "description" => "required"
+            //
         ];
     }
 }

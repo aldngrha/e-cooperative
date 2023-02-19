@@ -57,7 +57,7 @@
       <span>Angsuran</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url("backend/tables.html")}}">
+    <a class="nav-link" href="{{route("surplus")}}">
       <i class="fas fa-fw fa-money-bill"></i>
       <span>Penarikan Sisa Hasil Usaha</span></a>
   </li>

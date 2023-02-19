@@ -38,7 +38,7 @@
                                     <select name="status" required class="form-control">
                                         <option value="{{ $loan->status }}">Tentukan Status Pinjaman</option>
                                         <option value="TERTUNDA">TERTUNDA</option>
-                                        <option value="BELUM LUNAS">BELUM LUNAS</option>
+                                        <option value="BELUM LUNAS">DISETUJUI</option>
                                         <option value="LUNAS">LUNAS</option>
                                     </select>
                                 </div>
