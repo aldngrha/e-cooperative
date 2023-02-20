@@ -80,7 +80,7 @@ class InstallmentController extends Controller
 
         $amount = $user->loans->sum("amount_loan");
 
-        if ($amount == 0 && $user->loans->where("status", "LUNAS")->count() > 0) {
+        if ($amount == 0) {
             return back()->with("error", "Kamu belum memiliki pinjaman");
         }
 
@@ -93,6 +93,17 @@ class InstallmentController extends Controller
             "installment_number" => $installmentNumber,
             "description" => $request->input("description"),
         ]);
+
+        // Get the loan related to the installment
+        $loan = Loan::findOrFail($selectedLoanId);
+        $option = Option::find(1)->time_period;
+
+
+        // Check if the loan has reached option installments
+        if ($loan->installments()->count() >= $option) {
+            $loan->status = "LUNAS";
+            $loan->save();
+        }
 
         return back()->with("message", "Berhasil membayar angsuran");
     }
