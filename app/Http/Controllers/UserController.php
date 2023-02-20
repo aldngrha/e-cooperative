@@ -40,58 +40,25 @@ class UserController extends Controller
     }
 
     public function loan() {
-        $user = User::with(
-            "loans.installments"
-        )->where("id", Auth::user()->id)->firstOrFail();
+        $users = User::with([
+            "loans"
+        ])->where("id", Auth::user()->id)->firstOrFail();
 
-        $due_date = $user->loans()->pluck("due_date")->map(function ($date) {
-            return Carbon::parse($date)->isoFormat("dddd, D MMMM YYYY");
-        });
+//        $items = Loan::with([
+//            "members",
+//        ])->orderBy("id", "DESC")->get();
+
+        $user = Auth::user();
+        $items = $user->loans()->get();
 
         $option = Option::firstOrFail();
 
-        $total = $user->loans()->sum("amount_loan");
-        $paid_off = $user->loans()->where("status", "LUNAS")->sum("amount_loan");
-
-        $rate = ($total * $option->interest_rate) / 100;
-        $rate_paid = ($paid_off * $option->interest_rate) / 100;
-
-        $total_paid_off = $rate_paid + $paid_off;
-
-        $total_rate = $rate + $total - $total_paid_off;
-
-        $installment = $total_rate;
-
-        $installments = $user->loans()->with(["installments"])->get()->pluck('installments')->collapse();
-
-        $total_installment = $installments->sum("amount_installment");
-
-        $total_interest = $installments->sum("interest_rate");
-
-        $installment_number = $installments->count() + 1;
-
-        $remaining  = $total_rate - ($total_installment + $total_interest);
-
-        if ($installment > 0) {
-            $result = $installment / $option->time_period;
-        } else {
-            $result = $installment;
-        }
-
-        if($user->loans->where("status", "LUNAS")->count() > 0) {
-           $remaining += $total_rate;
-        }
+        $installments = $users->loans()->with(["installments"])->get()->pluck('installments')->collapse();
 
         return view("pages.profile-loan", [
-            "user" => $user,
-            "total" => $total - $paid_off,
-            "due_date" => $due_date,
-            "rate" => $rate - $rate_paid,
-            "total_rate" => $total_rate,
-            "result" => $result,
-            "installment_number" => $installment_number,
-            "remaining" => $remaining,
+            "users" => $users,
             "option" => $option,
+            "items" => $items
         ]);
     }
 }
