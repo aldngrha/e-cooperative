@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Installment;
+use App\Models\Option;
 use App\Models\Surplus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SurplusController extends Controller
@@ -17,10 +19,15 @@ class SurplusController extends Controller
     {
         $installment = Installment::all();
 
+        $date = Option::find(1)->date_withdraw;
+
+        $option = Carbon::parse($date)->format("m-d");
+
         $rate = $installment->sum("interest_rate");
 
         return view("pages.surplus", [
-            "rate" => $rate
+            "rate" => $rate,
+            "option" => $option
         ]);
     }
 

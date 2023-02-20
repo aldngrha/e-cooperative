@@ -66,40 +66,42 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{ route("loan-process") }}" method="POST">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="row align-items-center">
-                                <label class="col-sm-2" for="amount_loan">Jumlah Pinjaman</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-prepend">
-                                            <span class="input-group-text">Rp</span>
-                                        </span>
-                                        <input type="number" name="amount_loan" autocomplete="off"
-                                           class="form-control{{ $errors->has('amount_loan') ? ' is-invalid' : '' }}"
-                                           value="{{ old('amount_loan') }}">
+                @if (\Carbon\Carbon::now()->format('m-d') == $option)
+                    <form action="{{ route("loan-process") }}" method="POST">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="row align-items-center">
+                                    <label class="col-sm-2" for="amount_loan">Jumlah Pinjaman</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <span class="input-group-text">Rp</span>
+                                            </span>
+                                            <input type="number" name="amount_loan" autocomplete="off"
+                                               class="form-control{{ $errors->has('amount_loan') ? ' is-invalid' : '' }}"
+                                               value="{{ old('amount_loan') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-2" for="amount_deposit">Keterangan</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="description" autocomplete="off"
+                                                  class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}">
+                                            {{ old("description") }}
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-sm-2" for="amount_deposit">Keterangan</label>
-                                <div class="col-sm-10">
-                                    <textarea name="description" autocomplete="off"
-                                              class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}">
-                                        {{ old("description") }}
-                                    </textarea>
-                                </div>
-                            </div>
+                        <div class="card-footer text-right">
+                            <button type="submit" class="btn btn-primary">Ajukan Simpanan</button>
                         </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <button type="submit" class="btn btn-primary">Ajukan Simpanan</button>
-                    </div>
-                </form>
+                    </form>
+                @endif
             </div>
         </div>
         <!-- /.container-fluid -->
