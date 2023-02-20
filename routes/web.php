@@ -57,6 +57,7 @@ Route::prefix("admin")
         Route::resource("saving-voluntary", "SavingVoluntaryController");
         Route::resource("saving-must", "SavingMustController");
         Route::resource("loan", "LoanController");
+        Route::resource("installment", "InstallmentController");
         Route::resource("member", "MemberController");
 });
 
