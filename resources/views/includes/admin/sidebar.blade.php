@@ -67,24 +67,24 @@
     </a>
   </li>
   <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="">
-      <i class="fas fa-fw fa-file-pdf"></i>
+  <li class="nav-item {{ request()->is('admin/installment*') ? 'active' : '' }}">
+    <a class="nav-link" href={{ route("installment.index") }}>
+      <i class="fas fa-fw fa-money-bill-wave"></i>
       <span>Angsuran</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="">
-      <i class="fas fa-fw fa-file-pdf"></i>
+      <i class="fas fa-fw fa-arrow-circle-down"></i>
       <span>Modal Koperasi</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="">
-      <i class="fas fa-fw fa-file-pdf"></i>
+      <i class="fas fa-fw fa-arrow-circle-up"></i>
       <span>Pengeluaran</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="">
-      <i class="fas fa-fw fa-file-pdf"></i>
+      <i class="fas fa-fw fa-money-bill"></i>
       <span>Sisa Hasil Usaha (SHU)</span></a>
   </li>
   <li class="nav-item">
