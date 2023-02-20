@@ -16,6 +16,6 @@ class Installment extends Model
     protected $hidden = [];
 
     public function loans() {
-        $this->belongsTo(Loan::class, "loans_id", "id");
+        return $this->belongsTo(Loan::class, "loans_id", "id");
     }
 }
