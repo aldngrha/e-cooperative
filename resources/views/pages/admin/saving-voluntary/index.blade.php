@@ -37,8 +37,11 @@
                                 <td>{{ $item->description }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>
-                                    <a href="{{ route('saving.show', $item->members->id) }}" class="btn btn-info">
+                                    <a href="{{ route('saving-voluntary.show', $item->members->id) }}" class="btn btn-info">
                                         <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ route('saving-voluntary.edit', $item->id) }}" class="btn btn-warning">
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </td>
                             </tr>
