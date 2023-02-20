@@ -17,6 +17,7 @@ class CreateOptionsTable extends Migration
             $table->bigIncrements("id");
             $table->integer("interest_rate");
             $table->integer("time_period");
+            $table->date("date_withdraw");
             $table->softDeletes();
             $table->timestamps();
         });
