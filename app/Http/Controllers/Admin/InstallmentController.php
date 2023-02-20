@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Installment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class DepositController extends Controller
+class InstallmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,11 @@ class DepositController extends Controller
      */
     public function index()
     {
-        //
+        $installments = Installment::with(['loans.members'])->get();
+
+        return view("pages.admin.installment.index", [
+            "items" => $installments
+        ]);
     }
 
     /**
