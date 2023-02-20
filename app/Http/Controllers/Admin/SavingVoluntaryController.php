@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DepositMustRequest;
+use App\Http\Requests\DepositRequest;
 use App\Models\DepositVoluntary;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,7 +69,11 @@ class SavingVoluntaryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $save = DepositVoluntary::findOrFail($id);
+
+        return view("pages.admin.saving-voluntary.edit", [
+            "save" => $save
+        ]);
     }
 
     /**
@@ -77,9 +83,13 @@ class SavingVoluntaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepositRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $save = DepositVoluntary::findOrFail($id);
+        $save->update($data);
+
+        return redirect()->route("saving-voluntary.index");
     }
 
     /**
