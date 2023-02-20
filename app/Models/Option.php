@@ -11,7 +11,7 @@ class Option extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["interest_rate", "time_period"];
+    protected $fillable = ["interest_rate", "time_period", "date_withdraw"];
 
     protected $hidden = [];
 

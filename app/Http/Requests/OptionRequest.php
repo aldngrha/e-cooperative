@@ -26,6 +26,7 @@ class OptionRequest extends FormRequest
         return [
             "interest_rate" => "required|integer",
             "time_period" => "required|integer",
+            "date_withdraw" => "required|date"
         ];
     }
 }
