@@ -25,6 +25,7 @@
                             <tr>
                                 <th>Bunga (%)</th>
                                 <th>Lama Pinjam (dalam bulan)</th>
+                                <th>Tanggal Penarikan SHU</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                             <tr>
                                 <td>{{ $item->interest_rate }}</td>
                                 <td>{{ $item->time_period }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->date_withdraw)->isoFormat("D MMMM YYYY") }}</td>
                                 <td>
                                     <a href="{{ route('option.edit', $item->id) }}" class="btn btn-info">
                                         <i class="fas fa-pencil-alt"></i>

@@ -49,6 +49,15 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="date_withdraw">Tanggal Penarikan SHU</label>
+                                    <input type="date" name="date_withdraw" placeholder="masukkan lama waktu pinjaman" class="form-control{{ $errors->has('date_withdraw') ? ' is-invalid' : '' }}" value="{{ old("date_withdraw") }}">
+                                    @if ($errors->has('date_withdraw'))
+                                        <span class="invalid-feedback">{{ $errors->first('date_withdraw') }}</span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer text-right">
