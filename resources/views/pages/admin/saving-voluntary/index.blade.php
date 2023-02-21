@@ -21,6 +21,7 @@
                         <thead>
                         <tr>
                             <th>No</th>
+                            <th>Kode Anggota</th>
                             <th>Nama Anggota</th>
                             <th>Jumlah Simpan</th>
                             <th>Keterangan</th>
@@ -32,6 +33,7 @@
                         @forelse ($items as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->members->member_number }}</td>
                                 <td>{{ $item->members->name }}</td>
                                 <td>Rp {{ number_format($item->amount_deposit,0,".",".") }}</td>
                                 <td>{{ $item->description }}</td>

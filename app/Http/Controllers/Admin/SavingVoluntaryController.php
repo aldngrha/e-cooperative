@@ -53,9 +53,9 @@ class SavingVoluntaryController extends Controller
      */
     public function show($id)
     {
-        $user = User::with(["deposits"])->findOrFail($id);
-        $showSum = $user->deposits()->sum("amount_deposit");
-        return view("pages.admin.saving.saving-detail", [
+        $user = User::with(["depositVoluntaries"])->findOrFail($id);
+        $showSum = $user->depositVoluntaries()->sum("amount_deposit");
+        return view("pages.admin.saving-voluntary.saving-detail", [
             "user" => $user,
             "showSum" => $showSum
         ]);
@@ -89,7 +89,7 @@ class SavingVoluntaryController extends Controller
         $save = DepositVoluntary::findOrFail($id);
         $save->update($data);
 
-        return redirect()->route("saving-voluntary.index");
+        return redirect()->route("saving-voluntary.index")->with("message", "Berhasil menambah simpanan sukarela");
     }
 
     /**
