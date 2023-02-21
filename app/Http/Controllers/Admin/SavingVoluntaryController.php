@@ -69,7 +69,7 @@ class SavingVoluntaryController extends Controller
      */
     public function edit($id)
     {
-        $save = DepositVoluntary::findOrFail($id);
+        $save = DepositVoluntary::with(["members"])->findOrFail($id);
 
         return view("pages.admin.saving-voluntary.edit", [
             "save" => $save

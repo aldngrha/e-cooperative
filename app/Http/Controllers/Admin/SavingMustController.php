@@ -68,10 +68,10 @@ class SavingMustController extends Controller
      */
     public function edit($id)
     {
-        $save = DepositMust::findOrFail($id);
+        $save = DepositMust::with(["members"])->findOrFail($id);
 
         return view("pages.admin.saving-must.edit", [
-            "save" => $save
+            "save" => $save,
         ]);
     }
 

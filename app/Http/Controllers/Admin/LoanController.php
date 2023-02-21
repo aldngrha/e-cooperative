@@ -75,7 +75,7 @@ class LoanController extends Controller
      */
     public function edit($id)
     {
-        $loan = Loan::findOrFail($id);
+        $loan = Loan::with(["members"])->findOrFail($id);
 
         return view("pages.admin.loan.edit", [
            "loan" => $loan
