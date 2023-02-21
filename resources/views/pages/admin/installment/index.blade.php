@@ -7,6 +7,11 @@
 @section("content")
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        @if(session()->has("message"))
+            <div class="alert alert-success">
+                <p>{{  session()->get("message") }}</p>
+            </div>
+        @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="h3 mb-2 text-primary font-weight-bold">Tabel Angsuran</h6>
@@ -20,7 +25,8 @@
                             <th>Kode Pinjam</th>
                             <th>Nama Anggota</th>
                             <th>Angsuran Ke</th>
-                            <th>Jumlah Angsuran</th>
+                            <th>Nominal Angsuran</th>
+                            <th>Bunga Angsuran</th>
                             <th>Waktu Pembayaran</th>
                             <th>Action</th>
                         </tr>
@@ -33,6 +39,7 @@
                                 <td>{{ $item->loans->members->name }}</td>
                                 <td>{{ $item->installment_number }}</td>
                                 <td>Rp {{ number_format($item->amount_installment,0,".",".") }}</td>
+                                <td>Rp {{ number_format($item->interest_rate,0,".",".") }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>
                                     <a href="{{ route('installment.show', $item->loans->members->id) }}" class="btn btn-info">

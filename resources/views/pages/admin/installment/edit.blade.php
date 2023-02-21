@@ -14,7 +14,7 @@
 
         <div class="card shadow">
             <div class="card-header">
-                <h3 class="card-title text-primary font-weight-bold">Tambah Nominal Simpanan {{ $save->members->name }}</h3>
+                <h3 class="card-title text-primary font-weight-bold">Masukkan Nominal Pembayaran Angsuran {{ $installment->loans->members->name }}</h3>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -27,25 +27,36 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route("saving-voluntary.update", $save->id) }}" method="POST">
+                <form action="{{ route("installment.update", $installment->id) }}" method="POST">
                     @method("put")
                     @csrf
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
+                                <p>Angsuran Ke : {{ $installment->installment_number }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="status" for="amount_deposit">Nominal Simpanan Sukarela</label>
-                                    <input type="text" name="amount_deposit" class="form-control" id="amount_deposit" value={{ $save->amount_deposit }}>
+                                    <label class="status" for="amount_installment">Nominal Pembayaran Angsuran</label>
+                                    <input type="number" name="amount_installment" class="form-control" id="amount_installment" value={{ $installment->amount_installment }}>
                                 </div>
                                 <div class="form-group">
                                     <label class="status" for="description">Keterangan</label>
-                                    <textarea class="form-control" name="description">{{ $save->description }}</textarea>
+                                    <textarea class="form-control" name="description">{{ $installment->description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="status" for="interest_rate">Nominal Bunga Angsuran</label>
+                                    <input type="number" name="interest_rate" class="form-control" id="interest_rate" value={{ $installment->interest_rate }}>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Masukkan</button>
                     </div>
                 </form>
             </div>

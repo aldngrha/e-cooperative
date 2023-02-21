@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InstallmentRequest;
 use App\Models\Installment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -63,7 +64,11 @@ class InstallmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $installment = Installment::findOrFail($id);
+
+        return view("pages.admin.installment.edit", [
+            "installment" => $installment
+        ]);
     }
 
     /**
@@ -73,9 +78,13 @@ class InstallmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InstallmentRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $installment = Installment::findOrFail($id);
+        $installment->update($data);
+
+        return redirect()->route("installment.index")->with("message", "Berhasil memasukkan nominal pembayaran angsuran");
     }
 
     /**
