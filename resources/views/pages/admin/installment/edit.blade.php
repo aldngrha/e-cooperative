@@ -31,9 +31,15 @@
                     @method("put")
                     @csrf
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Angsuran Ke : {{ $installment->installment_number }}</p>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <p class="text-primary">Nama Lengkap : {{ $installment->loans->members->name }}</p>
+                                <p class="text-primary">Kode Anggota : {{ $installment->loans->members->member_number }}</p>
+                                <p class="text-primary">Angsuran Ke : {{ $installment->installment_number }}</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-primary">Kode Pinjam : {{ $installment->loans->loan_code }}</p>
+                                <p class="text-primary">Hari, Tanggal : {{ \Carbon\Carbon::parse($installment->created_at)->isoFormat("dddd, D MMMM YYYY") }}</p>
                             </div>
                         </div>
                         <div class="row">
