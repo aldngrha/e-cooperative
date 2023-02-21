@@ -31,8 +31,8 @@
                             <td>{{ $user->place_of_birth }}, {{ \Carbon\Carbon::parse($user->date_of_birth)->isoFormat("D MMMM YYYY") }}</td>
                         </tr>
                         <tr>
-                            <th>Total Simpanan Pokok</th>
-                            <td>Rp {{ number_format($user->amount_deposit,0,".",".") }}</td>
+                            <th class="text-primary">Total Simpanan Pokok</th>
+                            <td class="text-primary">Rp {{ number_format($user->amount_deposit,0,".",".") }}</td>
                         </tr>
                     </table>
                 </div>
