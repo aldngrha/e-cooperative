@@ -72,8 +72,8 @@
       <i class="fas fa-fw fa-money-bill-wave"></i>
       <span>Angsuran</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="">
+  <li class="nav-item {{ request()->is('admin/capital*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route("capital.index") }}">
       <i class="fas fa-fw fa-arrow-circle-down"></i>
       <span>Modal Koperasi</span></a>
   </li>
