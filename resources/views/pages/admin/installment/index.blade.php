@@ -7,13 +7,9 @@
 @section("content")
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
-        <!-- Page Heading -->
-
-        <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h1 class="h3 mb-2 text-primary font-weight-bold">Tabel Angsuran</h1>
+                <h6 class="h3 mb-2 text-primary font-weight-bold">Tabel Angsuran</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -59,7 +55,7 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /.container-fluid -->
+
 @endsection
