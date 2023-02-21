@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DepositMustRequest;
 use App\Models\DepositMust;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,7 +68,11 @@ class SavingMustController extends Controller
      */
     public function edit($id)
     {
-        //
+        $save = DepositMust::findOrFail($id);
+
+        return view("pages.admin.saving-must.edit", [
+            "save" => $save
+        ]);
     }
 
     /**
@@ -77,9 +82,13 @@ class SavingMustController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepositMustRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $save = DepositMust::findOrFail($id);
+        $save->update($data);
+
+        return redirect()->route("saving-must.index")->with("message", "Berhasil menambah simpanan wajib");
     }
 
     /**
