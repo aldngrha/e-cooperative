@@ -19,6 +19,10 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
                         <tr>
+                            <th>Kode Anggota</th>
+                            <td>{{ $user->member_number }}</td>
+                        </tr>
+                        <tr>
                             <th>Nama Anggota</th>
                             <td>{{ $user->name }}</td>
                         </tr>
@@ -29,6 +33,18 @@
                         <tr>
                             <th>Tempat, Tanggal Lahir</th>
                             <td>{{ $user->place_of_birth }}, {{ \Carbon\Carbon::parse($user->date_of_birth)->isoFormat("D MMMM YYYY") }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nomor Handphone</th>
+                            <td>{{ $user->phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Jabatan</th>
+                            <td>{{ $user->position }}</td>
+                        </tr>
+                        <tr>
+                            <th>Alamat</th>
+                            <td>{{ $user->address }}</td>
                         </tr>
                         <tr>
                             <th class="text-primary">Total Simpanan Pokok</th>

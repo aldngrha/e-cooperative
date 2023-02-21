@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="status" for="amount_deposit">Nominal Simpanan Wajib</label>
-                                    <input type="text" name="amount_deposit" class="form-control" id="amount_deposit" value={{ $save->amount_deposit }}>
+                                    <input type="number" name="amount_deposit" class="form-control" id="amount_deposit" value={{ $save->amount_deposit }}>
                                 </div>
                             </div>
                             <div class="col-md-6">
