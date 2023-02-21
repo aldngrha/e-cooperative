@@ -53,7 +53,12 @@ class InstallmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::with(["loans.installments"])->findOrFail($id);
+
+        return view("pages.admin.installment.installment-detail", [
+            "users" => $users
+        ]);
+
     }
 
     /**
@@ -64,7 +69,7 @@ class InstallmentController extends Controller
      */
     public function edit($id)
     {
-        $installment = Installment::findOrFail($id);
+        $installment = Installment::with(["loans.members"])->findOrFail($id);
 
         return view("pages.admin.installment.edit", [
             "installment" => $installment
