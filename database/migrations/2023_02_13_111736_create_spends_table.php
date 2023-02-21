@@ -16,7 +16,7 @@ class CreateSpendsTable extends Migration
         Schema::create('spends', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->integer("amount_spend");
-            $table->string("description");
+            $table->text("description");
             $table->timestamps();
             $table->softDeletes();
         });
