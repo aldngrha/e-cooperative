@@ -1,7 +1,7 @@
 @extends("layouts.admin.admin")
 
 @section("title")
-    Dashboard Admin Koperasi
+    Ubah Modal Koperasi
 @endsection
 
 @section("content")
@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mt-4">
-                                    <label class="status" for="amount_capital">Nominal Pembayaran Angsuran</label>
+                                    <label class="status" for="amount_capital">Nominal Modal</label>
                                     <input type="number" name="amount_capital" class="form-control" id="amount_capital" value="{{ $capital->amount_capital }}">
                                 </div>
                                 <div class="form-group">
