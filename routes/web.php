@@ -34,9 +34,9 @@ Route::middleware(["auth","user"])->group(function () {
     Route::get("/loan", [LoanController::class, "index"])->name("loan");
     Route::post("/loan", [LoanController::class, "process"])->name("loan-process");
     Route::get("/installment", [InstallmentController::class, "index"])->name("installment");
-//    Route::get("/installment/{loanId}", [InstallmentController::class, "getLoanById"])->name("getLoan");
     Route::post("/installment", [InstallmentController::class, "create"])->name("installment-checkout");
     Route::get("/surplus", [SurplusController::class, "index"])->name("surplus");
+    Route::post("/surplus", [SurplusController::class, "process"])->name("withdraw");
     Route::get("/profile/edit", [UserController::class, "edit"])->name("edit");
     Route::put("/profile/edit", [UserController::class, "update"])->name("update");
     Route::get("/profile/saving", [UserController::class, "saving"])->name("saving");
