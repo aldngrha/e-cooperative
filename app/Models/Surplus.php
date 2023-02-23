@@ -11,7 +11,7 @@ class Surplus extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["users_id", "withdraw", "status"];
+    protected $fillable = ["users_id", "surplus_code", "amount_withdraw", "status"];
 
     protected $hidden = [];
 
@@ -19,4 +19,7 @@ class Surplus extends Model
         return $this->belongsTo(User::class, "users_id", "id");
     }
 
+    public function capitals() {
+        return $this->hasOne(Capital::class, "surplus_id", "id");
+    }
 }

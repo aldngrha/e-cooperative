@@ -13,7 +13,7 @@ class SurplusRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class SurplusRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "users_id" => "integer",
+            "surplus_code" => "string",
+            "amount_withdraw" => "integer",
+            "status" => "string|in:PENDING,ACCEPT,DECLINE"
         ];
     }
 }
