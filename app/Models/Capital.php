@@ -11,8 +11,11 @@ class Capital extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["amount_capital", "description"];
+    protected $fillable = ["surplus_id", "amount_capital", "description"];
 
     protected $hidden = [];
 
+    public function withdraws() {
+        return $this->belongsTo(Surplus::class, "surplus_id", "id");
+    }
 }
