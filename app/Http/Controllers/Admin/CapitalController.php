@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CapitalRequest;
 use App\Models\Capital;
 use Illuminate\Http\Request;
 
@@ -41,9 +42,12 @@ class CapitalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CapitalRequest $request)
     {
+        $data = $request->all();
 
+        Capital::create($data);
+        return redirect()->route("capital.index")->with("message", "Berhasil menambah modal koperasi");
     }
 
     /**
@@ -52,7 +56,7 @@ class CapitalController extends Controller
      * @param  \App\Models\Capital  $capital
      * @return \Illuminate\Http\Response
      */
-    public function show(Capital $capital)
+    public function show($id)
     {
         //
     }
@@ -63,9 +67,13 @@ class CapitalController extends Controller
      * @param  \App\Models\Capital  $capital
      * @return \Illuminate\Http\Response
      */
-    public function edit(Capital $capital)
+    public function edit($id)
     {
-        //
+        $capital = Capital::findOrFail($id);
+
+        return view("pages.admin.capital.edit", [
+            "capital" => $capital
+        ]);
     }
 
     /**
@@ -75,9 +83,14 @@ class CapitalController extends Controller
      * @param  \App\Models\Capital  $capital
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Capital $capital)
+    public function update(CapitalRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $capital = Capital::findOrFail($id);
+        $capital->update($data);
+
+        return redirect()->route("capital.index")->with("message", "Berhasil mengubah modal");
     }
 
     /**
@@ -86,8 +99,11 @@ class CapitalController extends Controller
      * @param  \App\Models\Capital  $capital
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Capital $capital)
+    public function destroy($id)
     {
-        //
+        $capital = Capital::findOrFail($id);
+        $capital->delete();
+
+        return redirect()->route("capital.index")->with("message", "Berhasil menghapus modal");
     }
 }

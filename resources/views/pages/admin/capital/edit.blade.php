@@ -14,7 +14,7 @@
 
         <div class="card shadow">
             <div class="card-header">
-                <h3 class="card-title text-primary font-weight-bold">Tambah Modal Koperasi</h3>
+                <h3 class="card-title text-primary font-weight-bold">Ubah Modal</h3>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -27,24 +27,25 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route("capital.store") }}" method="POST">
+                <form action="{{ route("capital.update", $capital->id) }}" method="POST">
+                    @method("put")
                     @csrf
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mt-4">
                                     <label class="status" for="amount_capital">Nominal Pembayaran Angsuran</label>
-                                    <input type="number" name="amount_capital" class="form-control" id="amount_capital" value="{{ old("amount_capital") }}">
+                                    <input type="number" name="amount_capital" class="form-control" id="amount_capital" value="{{ $capital->amount_capital }}">
                                 </div>
                                 <div class="form-group">
                                     <label class="status" for="description">Keterangan</label>
-                                    <textarea class="form-control" name="description">{{ old("description") }}</textarea>
+                                    <textarea class="form-control" name="description">{{ $capital->description }}</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Ubah</button>
                     </div>
                 </form>
             </div>

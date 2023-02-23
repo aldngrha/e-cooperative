@@ -19,7 +19,7 @@
                     <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Modal</a>
             </div>
             <div class="card-body">
-                <p class="text-primary">Jumlah Modal Koperasi : {{ $amount }}</p>
+                <p class="text-primary">Jumlah Modal Koperasi : Rp {{ number_format($amount,0,".",".") }}</p>
                 <div class="table-responsive">
                     <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -35,13 +35,20 @@
                         @forelse ($capitals as $capital)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $capital->amount_capital }}</td>
+                                <td>Rp {{ number_format($capital->amount_capital,0,".",".") }}</td>
                                 <td>{{ $capital->description }}</td>
-                                <td>{{ $capital->created_at }}</td>
+                                <td>{{ \Carbon\Carbon::parse($capital->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>
                                     <a href="{{ route('capital.edit', $capital->id) }}" class="btn btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
+                                    <form action="{{ route('capital.destroy', $capital->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
