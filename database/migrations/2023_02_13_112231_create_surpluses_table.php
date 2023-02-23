@@ -16,7 +16,8 @@ class CreateSurplusesTable extends Migration
         Schema::create('surpluses', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->integer("users_id");
-            $table->integer("withdraw");
+            $table->string("surplus_code")->unique();
+            $table->integer("amount_withdraw");
             $table->string("status");
             $table->timestamps();
             $table->softDeletes();
