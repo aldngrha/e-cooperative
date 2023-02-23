@@ -77,8 +77,8 @@
       <i class="fas fa-fw fa-arrow-circle-down"></i>
       <span>Modal Koperasi</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="">
+  <li class="nav-item {{ request()->is('admin/spend*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route("spend.index") }}">
       <i class="fas fa-fw fa-arrow-circle-up"></i>
       <span>Pengeluaran</span></a>
   </li>
