@@ -82,8 +82,8 @@
       <i class="fas fa-fw fa-arrow-circle-up"></i>
       <span>Pengeluaran</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="">
+  <li class="nav-item {{ request()->is('admin/withdraw*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route("withdraw.index") }}">
       <i class="fas fa-fw fa-money-bill"></i>
       <span>Sisa Hasil Usaha (SHU)</span></a>
   </li>
