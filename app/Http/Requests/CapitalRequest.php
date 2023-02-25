@@ -24,6 +24,7 @@ class CapitalRequest extends FormRequest
     public function rules()
     {
         return [
+            "surplus_id" => "integer",
             "amount_capital" => "required|integer",
             "description" => "required"
         ];
