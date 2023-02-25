@@ -60,6 +60,7 @@ Route::prefix("admin")
         Route::resource("installment", "InstallmentController");
         Route::resource("capital", "CapitalController");
         Route::resource("spend", "SpendController");
+        Route::resource("withdraw", "WithdrawController");
         Route::resource("member", "MemberController");
 });
 
