@@ -95,7 +95,7 @@ class LoanController extends Controller
         $loan = Loan::findOrFail($id);
         $loan->update($data);
 
-        return redirect()->route("loan.index");
+        return redirect()->route("loan.index")->with("message", "Berhasil merubah status pinjaman");
     }
 
     /**
