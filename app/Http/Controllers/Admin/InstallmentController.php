@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InstallmentRequest;
 use App\Models\Installment;
+use App\Models\Option;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,11 @@ class InstallmentController extends Controller
     public function index()
     {
         $installments = Installment::with(['loans.members'])->get();
+        $option = Option::find(1)->interest_rate;
 
         return view("pages.admin.installment.index", [
-            "items" => $installments
+            "items" => $installments,
+            "option" => $option
         ]);
     }
 
