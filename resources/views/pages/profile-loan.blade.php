@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("title")
-    E-Koperasi - Pinjaman
+    Pinjaman Anggota - Koperasi
 @endsection
 
 @section("content")

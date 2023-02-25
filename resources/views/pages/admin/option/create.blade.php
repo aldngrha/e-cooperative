@@ -1,7 +1,7 @@
 @extends("layouts.admin.admin")
 
 @section("title")
-    Admin Koperasi - Opsi
+    Tambah Opsi - Admin Koperasi
 @endsection
 
 @section("content")

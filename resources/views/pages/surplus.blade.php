@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("title")
-    Dashboard Admin Koperasi
+    Penarikan Sisa Hasil Usaha - Koperasi
 @endsection
 
 @section("content")

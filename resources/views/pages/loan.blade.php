@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("title")
-    Dashboard Admin Koperasi
+    Pengajuan Pinjaman - Koperasi
 @endsection
 
 @section("content")
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button type="submit" class="btn btn-primary">Ajukan Simpanan</button>
+                        <button type="submit" class="btn btn-primary">Ajukan Pinjaman</button>
                     </div>
                 </form>
             </div>

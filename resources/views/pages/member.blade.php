@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("title")
-    Koperasi - Profile Anggota
+    Profile Anggota - Koperasi
 @endsection
 
 @section("content")

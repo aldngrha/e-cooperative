@@ -1,7 +1,7 @@
 @extends("layouts.admin.admin")
 
 @section("title")
-    Dashboard Admin Koperasi
+    Anggota - Admin Koperasi
 @endsection
 
 @section("content")

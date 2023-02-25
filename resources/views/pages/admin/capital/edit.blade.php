@@ -1,7 +1,7 @@
 @extends("layouts.admin.admin")
 
 @section("title")
-    Ubah Modal Koperasi
+    Ubah Modal - Admin Koperasi
 @endsection
 
 @section("content")

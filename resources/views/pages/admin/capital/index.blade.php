@@ -25,6 +25,7 @@
                         <thead>
                         <tr>
                             <th>No</th>
+                            <th>Kode Penarikan</th>
                             <th>Nominal Modal</th>
                             <th>Keterangan</th>
                             <th>Tanggal</th>
@@ -35,6 +36,7 @@
                         @forelse ($capitals as $capital)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ optional($capital->withdraws)->surplus_code }}</td>
                                 <td>Rp {{ number_format($capital->amount_capital,0,".",".") }}</td>
                                 <td>{{ $capital->description }}</td>
                                 <td>{{ \Carbon\Carbon::parse($capital->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>

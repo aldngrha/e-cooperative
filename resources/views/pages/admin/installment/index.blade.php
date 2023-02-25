@@ -1,7 +1,7 @@
 @extends("layouts.admin.admin")
 
 @section("title")
-    Simpanan Pokok - Admin Koperasi
+    Angsuran - Admin Koperasi
 @endsection
 
 @section("content")
