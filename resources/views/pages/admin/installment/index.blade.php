@@ -26,7 +26,6 @@
                             <th>Nama Anggota</th>
                             <th>Angsuran Ke</th>
                             <th>Nominal Angsuran</th>
-                            <th>Bunga Angsuran</th>
                             <th>Waktu Pembayaran</th>
                             <th>Action</th>
                         </tr>
@@ -38,8 +37,7 @@
                                 <td>{{ $item->loans->loan_code }}</td>
                                 <td>{{ $item->loans->members->name }}</td>
                                 <td>{{ $item->installment_number }}</td>
-                                <td>Rp {{ number_format($item->amount_installment,0,".",".") }}</td>
-                                <td>Rp {{ number_format($item->interest_rate,0,".",".") }}</td>
+                                <td>Rp {{ number_format((($item->amount_installment * $option) / 100) + $item->amount_installment,0,".",".") }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>
                                     <a href="{{ route('installment.show', $item->loans->members->id) }}" class="btn btn-info">
