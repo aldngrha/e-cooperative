@@ -7,6 +7,7 @@ use App\Http\Requests\InstallmentRequest;
 use App\Models\Installment;
 use App\Models\Option;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InstallmentController extends Controller
@@ -18,7 +19,9 @@ class InstallmentController extends Controller
      */
     public function index()
     {
-        $installments = Installment::with(['loans.members'])->get();
+        $installments = Installment::with(['loans.members'])
+            ->orderBy("created_at", "DESC")
+            ->get();
         $option = Option::find(1)->interest_rate;
 
         return view("pages.admin.installment.index", [
@@ -92,6 +95,10 @@ class InstallmentController extends Controller
         $installment = Installment::findOrFail($id);
         $installment->update($data);
 
+        $remainingLoanBalance = $installment->remaining - $request->input('amount_installment');
+        $installment->remaining = $remainingLoanBalance;
+        $installment->save();
+
         return redirect()->route("installment.index")->with("message", "Berhasil memasukkan nominal pembayaran angsuran");
     }
 
@@ -104,5 +111,39 @@ class InstallmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print($firstDate, $lastDate) {
+        $items = Installment::with(["loans.members"])
+            ->whereBetween("created_at", [$firstDate, $lastDate])
+            ->get();
+
+        $option = Option::find(1)->interest_rate;
+
+        foreach ($items as $item) {
+            // membuat instance Carbon dari atribut created_at
+            $date = Carbon::parse($item->created_at);
+
+            // mengambil nama bulan dalam bahasa Indonesia
+            $month = $date->locale('id')->monthName;
+
+            // mengambil nama tahun
+            $year = $date->year;
+        }
+
+        $amount = $items->sum("amount_installment");
+        $interest = $items->sum("remaining");
+        $amount_installment = ($amount * $option) / 100 + $amount;
+
+        $rate = ($interest * $option) / 100 + $interest;
+
+        return view("pages.admin.installment.print", [
+            "items" => $items,
+            "month" => $month,
+            "year" => $year,
+            "amount_installment" => $amount_installment,
+            "rate" => $rate,
+            "option" => $option
+        ]);
     }
 }

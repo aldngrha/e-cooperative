@@ -28,6 +28,7 @@ class InstallmentRequest extends FormRequest
             "installment_number" => "integer",
             "amount_installment" => "integer",
             "interest_rate" => "integer",
+            "remaining" => "integer",
             "description" => "required"
         ];
     }

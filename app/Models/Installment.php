@@ -11,7 +11,7 @@ class Installment extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["users_id", "loans_id","installment_number", "amount_installment", "interest_rate", "description"];
+    protected $fillable = ["users_id", "loans_id","installment_number", "amount_installment", "interest_rate", "remaining", "description"];
 
     protected $hidden = [];
 
