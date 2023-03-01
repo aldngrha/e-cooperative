@@ -26,6 +26,7 @@
                             <th>Nama Anggota</th>
                             <th>Angsuran Ke</th>
                             <th>Nominal Angsuran</th>
+                            <th>Sisa Angsuran</th>
                             <th>Waktu Pembayaran</th>
                             <th>Action</th>
                         </tr>
@@ -38,6 +39,7 @@
                                 <td>{{ $item->loans->members->name }}</td>
                                 <td>{{ $item->installment_number }}</td>
                                 <td>Rp {{ number_format((($item->amount_installment * $option) / 100) + $item->amount_installment,0,".",".") }}</td>
+                                <td>Rp {{ number_format((($item->remaining * $option) / 100) + $item->remaining,0,".",".") }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>
                                     <a href="{{ route('installment.show', $item->loans->members->id) }}" class="btn btn-info">
@@ -58,9 +60,42 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="my-3">
+                    <h4 class="h5">Cetak Data Angsuran</h4>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="input-group align-items-center">
+                            <label for="firstDate" class="mr-2">Tanggal Awal</label>
+                            <input type="date" name="firstDate" id="firstDate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="input-group align-items-center">
+                            <label for="lastDate" class="mr-2">Tanggal Akhir</label>
+                            <input type="date" name="lastDate" id="lastDate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <a href="#" onclick="printSaving()" target="_blank" class="btn btn-primary d-block"><i class="fas fa-print"></i> Cetak</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <!-- /.container-fluid -->
 
 @endsection
+<script>
+    function printSaving() {
+        const firstDate = document.getElementById("firstDate").value;
+        const lastDate = document.getElementById("lastDate").value;
+
+        const url = "{{ route('print-installment', [ 'firstDate' => ':firstDate', 'lastDate' => ':lastDate' ]) }}"
+            .replace(':firstDate', firstDate)
+            .replace(':lastDate', lastDate);
+
+        window.open(url, '_blank');
+    }
+</script>
+

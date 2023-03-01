@@ -84,15 +84,35 @@
                     </table>
                 </div>
                 <div class="my-3">
-                    <p class="text-primary">Jumlah Saldo Bunga : Rp {{ number_format($total < 0 ? 0 : $total,0,".",".") }}</p>
+                    <p class="text-primary">Jumlah Saldo Bunga : Rp {{ number_format($total,0,".",".") }}</p>
                     <form action="{{ route("withdraw.store") }}" method="POST">
                         @csrf
-                        @if($total > 0)
+                        @if($total > 0 && \Carbon\Carbon::now()->format('m-d') == $option)
                             <button type="submit" class="btn btn-primary">Masukkan ke modal</button>
                         @else
                             <button type="submit" class="btn btn-primary" disabled>Masukkan ke modal</button>
                         @endif
                     </form>
+                </div>
+                <div class="my-3">
+                    <h4 class="h5">Cetak Data Penarikan</h4>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="input-group align-items-center">
+                            <label for="firstDate" class="mr-2">Tanggal Awal</label>
+                            <input type="date" name="firstDate" id="firstDate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="input-group align-items-center">
+                            <label for="lastDate" class="mr-2">Tanggal Akhir</label>
+                            <input type="date" name="lastDate" id="lastDate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <a href="#" onclick="printSaving()" target="_blank" class="btn btn-primary d-block"><i class="fas fa-print"></i> Cetak</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,3 +120,15 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+<script>
+    function printSaving() {
+        const firstDate = document.getElementById("firstDate").value;
+        const lastDate = document.getElementById("lastDate").value;
+
+        const url = "{{ route('print-withdraw', [ 'firstDate' => ':firstDate', 'lastDate' => ':lastDate' ]) }}"
+            .replace(':firstDate', firstDate)
+            .replace(':lastDate', lastDate);
+
+        window.open(url, '_blank');
+    }
+</script>
