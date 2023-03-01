@@ -16,7 +16,9 @@ class CapitalController extends Controller
      */
     public function index()
     {
-        $capitals = Capital::with(["withdraws"])->get();
+        $capitals = Capital::with(["withdraws"])
+            ->orderBy("created_at", "DESC")
+            ->get();
 
         $amount = $capitals->pluck("amount_capital")->sum();
 

@@ -20,16 +20,26 @@ class SurplusController extends Controller
      */
     public function index()
     {
-        $installment = Installment::all();
+        $installment = Installment::sum("interest_rate");
+
+        $withdraw = Surplus::where("status", "ACCEPT")
+            ->orderBy("created_at", "desc")
+            ->first();
+
+        $totalWithdraw = $withdraw ? $withdraw->amount_withdraw : 0;
+
+        $total = $installment - $totalWithdraw;
+
+        if($total < 0) {
+            $total += $totalWithdraw;
+        }
 
         $date = Option::find(1)->date_withdraw;
-
         $option = Carbon::parse($date)->format("m-d");
 
-        $rate = $installment->sum("interest_rate");
 
         return view("pages.surplus", [
-            "rate" => $rate,
+            "rate" => $total,
             "date" => $date,
             "option" => $option
         ]);

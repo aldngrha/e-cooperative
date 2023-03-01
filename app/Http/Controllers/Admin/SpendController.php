@@ -16,7 +16,8 @@ class SpendController extends Controller
      */
     public function index()
     {
-        $spends = Spend::all();
+        $spends = Spend::orderBy("created_at", "DESC")
+            ->get();
 
         $amount = $spends->pluck("amount_spend")->sum();
 
