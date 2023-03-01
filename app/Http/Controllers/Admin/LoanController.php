@@ -7,6 +7,7 @@ use App\Http\Requests\LoanRequest;
 use App\Models\Loan;
 use App\Models\Option;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -107,5 +108,36 @@ class LoanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print($firstDate, $lastDate) {
+        $items = Loan::with(["members"])
+            ->whereBetween("created_at", [$firstDate, $lastDate])
+            ->get();
+
+        $option = Option::find(1)->interest_rate;
+
+        foreach ($items as $item) {
+            // membuat instance Carbon dari atribut created_at
+            $date = Carbon::parse($item->created_at);
+
+            // mengambil nama bulan dalam bahasa Indonesia
+            $month = $date->locale('id')->monthName;
+
+            // mengambil nama tahun
+            $year = $date->year;
+        }
+
+        $amount_loan = $items->sum("amount_loan");
+        $amount_interest = (($amount_loan * $option) / 100) + $amount_loan;
+
+        return view("pages.admin.loan.print", [
+            "items" => $items,
+            "option" => $option,
+            "month" => $month,
+            "year" => $year,
+            "amount_loan" => $amount_loan,
+            "amount_interest" => $amount_interest
+        ]);
     }
 }

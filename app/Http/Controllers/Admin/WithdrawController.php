@@ -7,7 +7,9 @@ use App\Http\Requests\CapitalRequest;
 use App\Http\Requests\SurplusRequest;
 use App\Models\Capital;
 use App\Models\Installment;
+use App\Models\Option;
 use App\Models\Surplus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WithdrawController extends Controller
@@ -19,20 +21,34 @@ class WithdrawController extends Controller
      */
     public function index()
     {
-        $withdraws = Surplus::with(["members"])->get();
-        $latestInstallment = Installment::latest('created_at')->first();
-        $installment = Installment::pluck("interest_rate")->sum() + $latestInstallment->amount_installment;
+        // Get all previous withdrawals
+        $withdraws = Surplus::with('members')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        $totalWithdraw = 0;
-        foreach($withdraws as $withdraw) {
-            $totalWithdraw += $withdraw->amount_withdraw;
+        // Get the total balance of interest
+        $totalInterest = Installment::sum('interest_rate');
+
+        // Get the total amount of previous withdrawals that have been accepted
+        $latestWithdraw = $withdraws->where('status', 'ACCEPT')->first();
+
+        $lastWithdrawAmount = $latestWithdraw ? $latestWithdraw->amount_withdraw : 0;
+
+        $remainingInterest = $totalInterest - $lastWithdrawAmount;
+
+        if ($remainingInterest < 0) {
+            $remainingInterest += $lastWithdrawAmount;
         }
 
-        $total = $installment - $totalWithdraw;
+        // Get the date of the next withdrawal
+        $option = Option::find(1);
+        $date = $option->date_withdraw;
+        $withdrawDate = Carbon::parse($date)->format('m-d');
 
         return view("pages.admin.withdraw.index", [
             "withdraws" => $withdraws,
-            "total" => $total
+            "total" => $remainingInterest,
+            "option" => $withdrawDate
         ]);
     }
 
@@ -54,24 +70,27 @@ class WithdrawController extends Controller
      */
     public function store()
     {
-        $withdraws = Surplus::all();
-        $latestInstallment = Installment::latest('created_at')->first();
-        $installment = Installment::pluck("interest_rate")->sum() + $latestInstallment->amount_installment;
+        // Get the total balance of interest
+        $totalInterest = Installment::sum('interest_rate');
 
-        $totalWithdraw = 0;
-        foreach($withdraws as $withdraw) {
-            $totalWithdraw += $withdraw->amount_withdraw;
-        }
+        // Get the total amount of previous withdrawals that have been accepted
+        $latestWithdraw = Surplus::where('status', 'ACCEPT')
+            ->orderBy("created_at", "desc")
+            ->first();
 
-        $total = $installment - $totalWithdraw;
+        $totalWithdrawn = $latestWithdraw ? $latestWithdraw->amount_withdraw : 0;
+
+        // Calculate the remaining balance of interest after previous withdrawals
+        $remainingInterest = $totalInterest - $totalWithdrawn;
 
         Capital::create([
             "surplus_id" => null,
-            "amount_capital" => $total,
+            "amount_capital" => $remainingInterest,
             "description" => "Saldo awal tahun"
         ]);
 
-        Installment::query()->update(["interest_rate" => null]);
+        // Set the interest rates of all installments to null
+        Installment::where("interest_rate", ">", 0)->update(['interest_rate' => 0]);
 
         return redirect()->route("withdraw.index")->with("message", "Berhasil menambahkan ke saldo awal tahun");
     }
@@ -141,5 +160,31 @@ class WithdrawController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print($firstDate, $lastDate) {
+        $items = Surplus::with(["members"])
+            ->whereBetween("created_at", [$firstDate, $lastDate])
+            ->get();
+
+        foreach ($items as $item) {
+            // membuat instance Carbon dari atribut created_at
+            $date = Carbon::parse($item->created_at);
+
+            // mengambil nama bulan dalam bahasa Indonesia
+            $month = $date->locale('id')->monthName;
+
+            // mengambil nama tahun
+            $year = $date->year;
+        }
+
+        $amount_withdraw = $items->sum("amount_withdraw");
+
+        return view("pages.admin.withdraw.print", [
+            "items" => $items,
+            "month" => $month,
+            "year" => $year,
+            "amount_withdraw" => $amount_withdraw,
+        ]);
     }
 }

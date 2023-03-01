@@ -94,10 +94,30 @@ class InstallmentController extends Controller
             "description" => $request->input("description"),
         ]);
 
+        // Get the total amount of the loan
+        $totalLoanAmount = $loan->amount_loan;
+
+    // Get all installments related to the selected loan
+        $loanInstallments = $loan->installments;
+
+    // Get the total amount of the installments
+        $totalInstallmentAmount = $loanInstallments->sum('amount_installment');
+
+    // Calculate the remaining loan balance for the current installment
+        $currentInstallmentNumber = $installmentNumber;
+        $currentInstallmentAmount = $request->input('amount_installment');
+        $remainingLoanBalance = $totalLoanAmount - ($totalInstallmentAmount + $currentInstallmentAmount);
+
+    // Set the remaining loan balance for the current installment
+        $installment = Installment::where('loans_id', $selectedLoanId)
+            ->where('installment_number', $installmentNumber)
+            ->firstOrFail();
+        $installment->remaining = $remainingLoanBalance;
+        $installment->save();
+
         // Get the loan related to the installment
         $loan = Loan::findOrFail($selectedLoanId);
         $option = Option::find(1)->time_period;
-
 
         // Check if the loan has reached option installments
         if ($loan->installments()->count() >= $option) {

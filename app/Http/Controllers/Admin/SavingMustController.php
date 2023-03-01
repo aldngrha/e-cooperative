@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DepositMustRequest;
 use App\Models\DepositMust;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SavingMustController extends Controller
@@ -100,5 +101,26 @@ class SavingMustController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print($firstDate, $lastDate) {
+        $items = DepositMust::with(["members"])->whereBetween("created_at", [$firstDate, $lastDate])->get();
+
+        foreach ($items as $item) {
+            // membuat instance Carbon dari atribut created_at
+            $date = Carbon::parse($item->created_at);
+
+            // mengambil nama bulan dalam bahasa Indonesia
+            $month = $date->locale('id')->monthName;
+
+            // mengambil nama tahun
+            $year = $date->year;
+        }
+
+        return view("pages.admin.saving-must.print", [
+            "items" => $items,
+            "month" => $month,
+            "year" => $year
+        ]);
     }
 }

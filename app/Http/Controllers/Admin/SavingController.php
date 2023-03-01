@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SavingController extends Controller
@@ -13,11 +14,12 @@ class SavingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = User::all();
+        $items = User::orderBy("member_number", "DESC")->get()->slice(0, -1)->values();
+
         return view("pages.admin.saving.index", [
-            "items" => $items
+            "items" => $items,
         ]);
     }
 
@@ -89,5 +91,26 @@ class SavingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print($firstDate, $lastDate) {
+        $items = User::whereBetween("created_at", [$firstDate, $lastDate])->get()->slice(1);
+
+        foreach ($items as $item) {
+            // membuat instance Carbon dari atribut created_at
+            $date = Carbon::parse($item->created_at);
+
+            // mengambil nama bulan dalam bahasa Indonesia
+            $month = $date->locale('id')->monthName;
+
+            // mengambil nama tahun
+            $year = $date->year;
+        }
+
+        return view("pages.admin.saving.print", [
+            "items" => $items,
+            "month" => $month,
+            "year" => $year
+        ]);
     }
 }

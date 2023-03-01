@@ -7,6 +7,7 @@ use App\Http\Requests\DepositMustRequest;
 use App\Http\Requests\DepositRequest;
 use App\Models\DepositVoluntary;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SavingVoluntaryController extends Controller
@@ -101,5 +102,26 @@ class SavingVoluntaryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print($firstDate, $lastDate) {
+        $items = DepositVoluntary::with(["members"])->whereBetween("created_at", [$firstDate, $lastDate])->get();
+
+        foreach ($items as $item) {
+            // membuat instance Carbon dari atribut created_at
+            $date = Carbon::parse($item->created_at);
+
+            // mengambil nama bulan dalam bahasa Indonesia
+            $month = $date->locale('id')->monthName;
+
+            // mengambil nama tahun
+            $year = $date->year;
+        }
+
+        return view("pages.admin.saving-voluntary.print", [
+            "items" => $items,
+            "month" => $month,
+            "year" => $year
+        ]);
     }
 }
