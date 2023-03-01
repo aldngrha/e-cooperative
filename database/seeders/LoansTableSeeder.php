@@ -27,5 +27,18 @@ class LoansTableSeeder extends Seeder
             "created_at" => Carbon::now(),
             "updated_at" => null,
         ]);
+
+        DB::table("loans")->insert([
+            "users_id" => 3,
+            "option_id" => 1,
+            "loan_code" => "PUT1234",
+            "amount_loan" => 2000000,
+            "due_date" => Carbon::now()->addMonth(10),
+            "description" => "SKlakslks",
+            "status" => "BELUM LUNAS",
+            "deleted_at" => null,
+            "created_at" => Carbon::now(),
+            "updated_at" => null,
+        ]);
     }
 }

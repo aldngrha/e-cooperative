@@ -38,5 +38,21 @@ class UsersTableSeeder extends Seeder
             "roles" => "USER",
             "amount_deposit" => 2000000
         ]);
+
+        DB::table("users")->insert([
+            "name" => "putri",
+            "member_number" => "002",
+            "email" => "putri@gmail.com",
+            "password" => bcrypt("userkoperasi"),
+            "place_of_birth" => "bandar lampung",
+            "date_of_birth" => now(),
+            "phone_number" => "098917231",
+            "gender" => "Laki-Laki",
+            "position" => "Guru",
+            "address" => "jl dr jarusn 1 jahsjha",
+            "created_at" => now(),
+            "roles" => "USER",
+            "amount_deposit" => 2000000
+        ]);
     }
 }

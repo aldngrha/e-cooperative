@@ -23,5 +23,14 @@ class DepositVolutariesTableSeeder extends Seeder
             "created_at" => Carbon::now(),
             "updated_at" => null
         ]);
+
+        DB::table("deposit_voluntaries")->insert([
+            "users_id" => 2,
+            "amount_deposit" => 3000000,
+            "description" => "skalkslkas",
+            "deleted_at" => null,
+            "created_at" => Carbon::now(),
+            "updated_at" => null
+        ]);
     }
 }

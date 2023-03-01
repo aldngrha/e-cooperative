@@ -23,5 +23,14 @@ class DepositMustsTableSeeder extends Seeder
             "created_at" => Carbon::now(),
             "updated_at" => null
         ]);
+
+        DB::table("deposit_musts")->insert([
+            "users_id" => 3,
+            "amount_deposit" => 1000000,
+            "description" => "skalkslkas",
+            "deleted_at" => null,
+            "created_at" => Carbon::now(),
+            "updated_at" => null
+        ]);
     }
 }
