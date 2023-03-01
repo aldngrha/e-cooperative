@@ -46,7 +46,7 @@
                             <p class="text-primary">Keuntungan Anggota :</p>
                         </div>
                         <div class="col">
-                            <p class="text-primary">Rp {{ number_format($rate,0,".",".") }}</p>
+                            <p class="text-primary">Rp {{ number_format($rate < 0 ? 0 : $rate,0,".",".") }}</p>
                             <p class="text-primary">50%</p>
                             <p class="text-primary">50%</p>
                         </div>
