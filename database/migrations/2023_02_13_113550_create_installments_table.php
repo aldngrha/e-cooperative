@@ -19,6 +19,7 @@ class CreateInstallmentsTable extends Migration
             $table->integer("installment_number");
             $table->integer("amount_installment")->nullable();
             $table->integer("interest_rate")->nullable();
+            $table->integer("remaining")->nullable();
             $table->string("description");
             $table->timestamps();
             $table->softDeletes();
