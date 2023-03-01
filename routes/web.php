@@ -12,6 +12,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\ChangePasswordUserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\Admin\ChangePasswordController;
+use App\Http\Controllers\Admin\SavingController;
+use App\Http\Controllers\Admin\SavingMustController;
+use App\Http\Controllers\Admin\SavingVoluntaryController;
+use App\Http\Controllers\Admin\LoanController as Loans;
+use App\Http\Controllers\Admin\InstallmentController as Installment;
+use App\Http\Controllers\Admin\WithdrawController;
 use App\Http\Controllers\Admin\OptionController;
 
 /*
@@ -54,13 +60,19 @@ Route::prefix("admin")
         Route::post("/change-password", [ChangePasswordController::class, "changePasswordPost"])->name("change-password");
         Route::resource("option", "OptionController");
         Route::resource("saving", "SavingController");
+        Route::get('/saving/print/{firstDate}/{lastDate}', [SavingController::class, "print"])->name('print');
         Route::resource("saving-voluntary", "SavingVoluntaryController");
+        Route::get('/saving-voluntary/print/{firstDate}/{lastDate}', [SavingVoluntaryController::class, "print"])->name('print-voluntary');
         Route::resource("saving-must", "SavingMustController");
+        Route::get('/saving-must/print/{firstDate}/{lastDate}', [SavingMustController::class, "print"])->name('print-must');
         Route::resource("loan", "LoanController");
+        Route::get('/loan/print/{firstDate}/{lastDate}', [Loans::class, "print"])->name('print-loan');
         Route::resource("installment", "InstallmentController");
+        Route::get('/installment/print/{firstDate}/{lastDate}', [Installment::class, "print"])->name('print-installment');
         Route::resource("capital", "CapitalController");
         Route::resource("spend", "SpendController");
         Route::resource("withdraw", "WithdrawController");
+        Route::get('/withdraw/print/{firstDate}/{lastDate}', [WithdrawController::class, "print"])->name('print-withdraw');
         Route::resource("member", "MemberController");
 });
 
