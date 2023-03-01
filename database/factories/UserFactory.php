@@ -7,6 +7,9 @@ use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
+    // di dalam class
+    protected static $memberNumber = 1;
+
     /**
      * Define the model's default state.
      *
@@ -14,12 +17,24 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        // di dalam function generateMember
+        $memberNumber = str_pad(self::$memberNumber, 3, "0", STR_PAD_LEFT); // membuat format 3 digit
+        self::$memberNumber++; // increment nomor member setiap kali fungsi dipanggil
+
         return [
             'name' => $this->faker->name(),
+            "member_number" => $memberNumber,
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            "password" => bcrypt("userkoperasi"),
+            "place_of_birth" => $this->faker->city(),
+            "date_of_birth" => $this->faker->dateTimeBetween('-60 years', '-18 years'),
+            "phone_number" => Str::random(12),
+            "gender" => $this->faker->randomElement(['Laki-Laki', 'Perempuan']),
+            "position" => $this->faker->randomElement(["Guru", "Tata Usaha", "Staff"]),
+            'address' => $this->faker->address(),
+            'created_at' => now(),
+            'roles' => 'USER',
+            'amount_deposit' => 2000000,
         ];
     }
 
@@ -28,12 +43,12 @@ class UserFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
+//    public function unverified()
+//    {
+//        return $this->state(function (array $attributes) {
+//            return [
+//                'email_verified_at' => null,
+//            ];
+//        });
+//    }
 }
