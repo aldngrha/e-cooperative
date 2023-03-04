@@ -36,7 +36,7 @@ class LoanFactory extends Factory
             'description' => $this->faker->sentence(),
             'status' => $status,
             'deleted_at' => null,
-            'created_at' => $this->faker->dateTimeBetween('-2 months', '-1 months'),
+            'created_at' => $this->faker->dateTimeBetween('-3 months', '-1 months'),
             'updated_at' => null,
         ];
     }
