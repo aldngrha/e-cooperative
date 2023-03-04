@@ -72,10 +72,11 @@
                                         <span class="input-group-prepend">
                                             <span class="input-group-text">Rp</span>
                                         </span>
-                                        <input type="number" name="amount_loan" autocomplete="off"
+                                        <input type="number" id="input-number" name="amount_loan" autocomplete="off"
                                            class="form-control{{ $errors->has('amount_loan') ? ' is-invalid' : '' }}"
-                                           value="{{ old('amount_loan') }}">
+                                        value="{{ old('amount_loan') }}">
                                     </div>
+                                    <span id="rupiah"></span>
                                 </div>
                             </div>
                         </div>
@@ -100,3 +101,48 @@
         <!-- /.container-fluid -->
     </div>
 @endsection
+@push("after-script")
+    <script>
+        // Ambil elemen input dan span dari DOM
+        let inputNumber = document.getElementById('input-number');
+        let spanRupiah = document.getElementById('rupiah');
+
+        // Tambahkan event listener 'input' pada inputNumber
+        inputNumber.addEventListener('input', function() {
+            // Dapatkan nilai input dari elemen inputNumber
+            let value = inputNumber.value;
+
+            // Validasi nilai input, hanya menerima angka dan koma
+            value = value.replace(/[^\d\,]/g, '');
+
+            // Jika nilai input kosong, jangan tampilkan apa-apa di dalam spanRupiah
+            if (value == '') {
+                spanRupiah.innerText = '';
+                return;
+            }
+
+            // Ubah nilai input menjadi format rupiah menggunakan fungsi formatRupiah
+            let formattedValue = formatRupiah(value);
+
+            // Tampilkan nilai input yang sudah diformat pada spanRupiah
+            spanRupiah.innerText = '* Rp ' + formattedValue;
+        });
+
+        // Fungsi formatRupiah untuk mengubah nilai input menjadi format rupiah
+        function formatRupiah(angka) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return rupiah;
+        }
+    </script>
+@endpush
