@@ -43,7 +43,7 @@
       </div>
   </li>
   <!-- Nav Item - Charts -->
-  <li class="nav-item {{ request()->is('loan') }} ? 'active' : ''">
+  <li class="nav-item {{ request()->is('loan') ? 'active' : '' }} ">
     <a class="nav-link collapsed" href="{{ route("loan") }}" >
       <i class="fas fa-fw fa-dollar-sign"></i>
       <span>Pengajuan Pinjaman</span>
@@ -51,21 +51,31 @@
 
   </li>
   <!-- Nav Item - Tables -->
-  <li class="nav-item">
+  <li class="nav-item {{ request()->is('installment') ? 'active' : '' }}">
     <a class="nav-link" href="{{route("installment")}}">
       <i class="fas fa-fw fa-money-bill-wave"></i>
       <span>Angsuran</span></a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item {{ request()->is('surplus') ? 'active' : '' }}">
     <a class="nav-link" href="{{route("surplus")}}">
       <i class="fas fa-fw fa-money-bill"></i>
       <span>Penarikan Sisa Hasil Usaha</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{url("backend/tables.html")}}">
-      <i class="fas fa-fw fa-file-pdf"></i>
-      <span>Laporan</span></a>
+  <li class="nav-item {{ request()->is('cash-flow', 'withdraw') ? 'active' : '' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#report"
+       aria-expanded="true" aria-controls="report">
+        <i class="fas fa-fw fa-file"></i>
+        <span>Laporan</span>
+    </a>
+    <div id="report" class="collapse" aria-labelledby="report" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Laporan</h6>
+            <a class="collapse-item" href="{{ route("cash-flow") }}">Laporan Arus Kas</a>
+            <a class="collapse-item" href="{{ route("withdraws") }}">Laporan Sisa Hasil Usaha</a>
+        </div>
+    </div>
   </li>
+
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

@@ -34,10 +34,18 @@
               <i class="fas fa-dollar-sign fa-sm fa-fw mr-2 text-gray-400"></i>
               Pinjaman
           </a>
-        <a class="dropdown-item" href="{{ route("password-edit") }}">
-          <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-          Settings
-        </a>
+          <a class="dropdown-item" href="{{ route("profile-installment") }}">
+              <i class="fas fa-money-bill-wave fa-sm fa-fw mr-2 text-gray-400"></i>
+              Angsuran
+          </a>
+          <a class="dropdown-item" href="{{ route("profile-withdraw") }}">
+              <i class="fas fa-money-bill fa-sm fa-fw mr-2 text-gray-400"></i>
+              Penarikan
+          </a>
+          <a class="dropdown-item" href="{{ route("password-edit") }}">
+            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+            Settings
+          </a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
           <form action="{{ route('logout') }}" method="POST">

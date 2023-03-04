@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\DepositVoluntary;
+use App\Models\Installment;
 use App\Models\Loan;
 use App\Models\Option;
 use App\Models\User;
@@ -53,12 +54,30 @@ class UserController extends Controller
 
         $option = Option::firstOrFail();
 
-        $installments = $users->loans()->with(["installments"])->get()->pluck('installments')->collapse();
-
         return view("pages.profile-loan", [
             "users" => $users,
             "option" => $option,
             "items" => $items
+        ]);
+    }
+
+    public function installment() {
+        $users = User::with(["loans.installments"])
+            ->where("id", Auth::user()->id)
+            ->firstOrFail();
+
+        return view("pages.profile-installment", [
+            "users" => $users
+        ]);
+    }
+
+    public function withdraw() {
+        $users = $users = User::with(["surpluses"])
+            ->where("id", Auth::user()->id)
+            ->firstOrFail();
+
+        return view("pages.profile-withdraw", [
+            "users" => $users
         ]);
     }
 }
