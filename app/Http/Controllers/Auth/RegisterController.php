@@ -73,7 +73,8 @@ class RegisterController extends Controller
             'member_number' => $data['member_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'amount_deposit' => $data["amount_deposit"]
+            'amount_deposit' => $data["amount_deposit"],
+            'status' => 'TERDAFTAR'
         ]);
     }
 }
