@@ -75,10 +75,18 @@ class InstallmentController extends Controller
      */
     public function edit($id)
     {
+        $option = Option::find(1)->interest_rate;
+
         $installment = Installment::with(["loans.members"])->findOrFail($id);
 
+        $nominal = ($installment->loans->amount_loan * $option) / 100;
+
+        $interest = ($nominal * $option) / 100;
+
         return view("pages.admin.installment.edit", [
-            "installment" => $installment
+            "installment" => $installment,
+            "nominal" => $nominal,
+            "interest" => $interest
         ]);
     }
 

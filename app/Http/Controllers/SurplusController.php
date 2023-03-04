@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SurplusRequest;
+use App\Models\Capital;
 use App\Models\Installment;
 use App\Models\Option;
 use App\Models\Surplus;
@@ -23,15 +24,18 @@ class SurplusController extends Controller
         $installment = Installment::sum("interest_rate");
 
         $withdraw = Surplus::where("status", "ACCEPT")
-            ->orderBy("created_at", "desc")
-            ->first();
+            ->sum("amount_withdraw");
 
-        $totalWithdraw = $withdraw ? $withdraw->amount_withdraw : 0;
+        $capital = Capital::where("description", "Saldo awal tahun")->sum("amount_capital");
 
-        $total = $installment - $totalWithdraw;
+//        $totalWithdraw = $withdraw ? $withdraw->amount_withdraw : 0;
+
+        $spend = $capital + $withdraw;
+
+        $total = $installment - $withdraw - $capital;
 
         if($total < 0) {
-            $total += $totalWithdraw;
+            $total += $spend;
         }
 
         $date = Option::find(1)->date_withdraw;
@@ -61,7 +65,14 @@ class SurplusController extends Controller
         $installment = Installment::all();
 
 //      Sum rate
-        $rate = $installment->sum("interest_rate");
+        $interest = $installment->sum("interest_rate");
+
+        $withdraw = Surplus::where("status", "ACCEPT")
+            ->sum("amount_withdraw");
+
+        $capital = Capital::where("description", "Saldo awal tahun")->sum("amount_capital");
+
+        $rate = $interest - $withdraw - $capital;
 
         // generate random string of 4 digits
         $random_number = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
