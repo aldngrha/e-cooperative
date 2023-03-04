@@ -55,10 +55,13 @@
         @endforelse
         <tr>
             <td colspan="3">Total</td>
-            <td>Rp</td>
+            <td>Rp {{ number_format($amount_deposit,0,".",".") }}</td>
         </tr>
         </tbody>
     </table>
 </div>
+<script>
+    window.print();
+</script>
 </body>
 </html>

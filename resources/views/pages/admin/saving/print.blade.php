@@ -45,7 +45,7 @@
                 <td>{{ $item->member_number }}</td>
                 <td>{{ $item->name }}</td>
                 <td>Rp {{ number_format($item->amount_deposit,0,".",".") }}</td>
-                <td>{{ $item->description }}</td>
+                <td>{{ $item->status }}</td>
             </tr>
         @empty
             <tr>
@@ -56,10 +56,13 @@
         @endforelse
         <tr>
             <td colspan="3">Total</td>
-            <td>Rp</td>
+            <td>Rp {{ number_format($amount_deposit,0,".",".") }}</td>
         </tr>
         </tbody>
     </table>
 </div>
+<script>
+    window.print();
+</script>
 </body>
 </html>
