@@ -8,6 +8,8 @@ use App\Http\Controllers\DepositMustController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\InstallmentController;
 use App\Http\Controllers\SurplusController;
+use App\Http\Controllers\CashFlowController as CashFlow;
+use App\Http\Controllers\WithdrawController as Withdraw;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\ChangePasswordUserController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -18,8 +20,8 @@ use App\Http\Controllers\Admin\SavingVoluntaryController;
 use App\Http\Controllers\Admin\LoanController as Loans;
 use App\Http\Controllers\Admin\InstallmentController as Installment;
 use App\Http\Controllers\Admin\WithdrawController;
-use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\CashFlowController;
+use App\Http\Controllers\Admin\SurplusController as Surplus;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,10 +46,16 @@ Route::middleware(["auth","user"])->group(function () {
     Route::post("/installment", [InstallmentController::class, "create"])->name("installment-checkout");
     Route::get("/surplus", [SurplusController::class, "index"])->name("surplus");
     Route::post("/surplus", [SurplusController::class, "process"])->name("withdraw");
+    Route::get("/cash-flow", [CashFlow::class, "index"])->name("cash-flow");
+    Route::post("/cash-flow", [CashFlow::class, "getData"])->name("cashflow");
+    Route::get("/withdraw", [Withdraw::class, "index"])->name("withdraws");
+    Route::post("/withdraw", [Withdraw::class, "getData"])->name("getWithdraw");
     Route::get("/profile/edit", [UserController::class, "edit"])->name("edit");
     Route::put("/profile/edit", [UserController::class, "update"])->name("update");
     Route::get("/profile/saving", [UserController::class, "saving"])->name("saving");
     Route::get("/profile/loan", [UserController::class, "loan"])->name("profile-loan");
+    Route::get("/profile/installment", [UserController::class, "installment"])->name("profile-installment");
+    Route::get("/profile/withdraw", [UserController::class, "withdraw"])->name("profile-withdraw");
     Route::get("/profile/change-password", [ChangePasswordUserController::class, "edit"])->name("password-edit");
     Route::post("/profile/change-password", [ChangePasswordUserController::class, "changePassword"])->name("change");
 });
@@ -75,8 +83,10 @@ Route::prefix("admin")
         Route::resource("withdraw", "WithdrawController");
         Route::get('/withdraw/print/{firstDate}/{lastDate}', [WithdrawController::class, "print"])->name('print-withdraw');
         Route::resource("member", "MemberController");
-        Route::resource("/cash-flow", "CashFlowController");
+        Route::resource("cash-flow", "CashFlowController");
         Route::post("/cash-flow", [CashFlowController::class, "getData"])->name("data");
+        Route::resource("surplus", "SurplusController");
+        Route::post("/surplus", [Surplus::class, "getData"])->name("report");
 });
 
 Auth::routes();
