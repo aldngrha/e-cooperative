@@ -107,10 +107,13 @@ class SavingController extends Controller
             $year = $date->year;
         }
 
+        $amount_deposit = $items->sum("amount_deposit");
+
         return view("pages.admin.saving.print", [
             "items" => $items,
             "month" => $month,
-            "year" => $year
+            "year" => $year,
+            "amount_deposit" => $amount_deposit
         ]);
     }
 }
