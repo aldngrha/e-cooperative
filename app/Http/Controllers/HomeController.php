@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Capital;
 use App\Models\DepositVoluntary;
 use App\Models\DepositMust;
+use App\Models\Installment;
 use App\Models\Loan;
 use App\Models\Option;
+use App\Models\Spend;
+use App\Models\Surplus;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,23 +28,32 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $deposit = DepositVoluntary::all();
-        $depositMust = DepositMust::all();
-        $loan = Loan::all();
-        $option = Option::firstOrFail();
-        $loans = Loan::with(["members"])->orderBy("id", "DESC")->take(10)->get();
+        $installments = Installment::all();
+        $capitals = Capital::all();
+        $withdraws = Surplus::all();
 
-        $amount_deposit = $deposit->sum("amount_deposit");
-        $amount_deposit_must = $depositMust->sum("amount_deposit");
+        $totalInstallment = $installments->sum("amount_installment");
+        $rate = $installments->sum("interest_rate");
+        $totalDeposit = User::sum("amount_deposit");
+        $totalDepositMust = DepositMust::sum("amount_deposit");
+        $totalDepositVoluntary = DepositVoluntary::sum("amount_deposit");
+        $totalCapital = $capitals->sum("amount_capital");
 
-        $loan_status_paid = $loan->where("status", "LUNAS")->sum("amount_loan");
-        $loan_status_pending = $loan->where("status", "TERTUNDA")->sum("amount_loan");
-        $amount_loan = $loan->sum("amount_loan");
+        $totalLoan = Loan::sum("amount_loan");
+        $totalExpense = Spend::sum("amount_spend");
+        $totalWithdraw = $withdraws->sum("amount_withdraw");
 
-        $rate = $option->interest_rate;
-        $total_loan = $amount_loan - $loan_status_paid - $loan_status_pending;
-        $with_rate = ($loan_status_paid * $rate) / 100 + $loan_status_paid;
-        $total_saldo = $amount_deposit + $amount_deposit_must - $amount_loan + $with_rate + $loan_status_pending;
+        $loans = Loan::with(["members"])->get();
+
+        $assets = $totalDeposit + $totalInstallment + $totalDepositVoluntary + $totalDepositMust + $totalCapital + $rate;
+        $liabilities = $totalLoan + $totalExpense + $totalWithdraw;
+
+        $wealth = $assets - $liabilities;
+
+        $capital = $capitals->where("description", "Saldo awal tahun")->sum("amount_capital");
+        $withdraw = $withdraws->where("status", "ACCEPT")->sum("amount_withdraw");
+
+        $interest = $rate - $capital - $withdraw;
 
         $pie = [
             "tertunda" => Loan::where("status", "TERTUNDA")->count(),
@@ -47,13 +61,13 @@ class HomeController extends Controller
             "belum_lunas" => Loan::where("status", "BELUM LUNAS")->count(),
         ];
 
-        return view('pages.home', [
-            "loans" => $loans,
-            "total" => $total_saldo,
-            "deposit" => $amount_deposit,
-            "deposit_must" => $amount_deposit_must,
-            "total_loan" => $total_loan,
-            "pie" => $pie
+        return view("pages.home", [
+            "assets" => $assets,
+            "liabilities" => $liabilities,
+            "wealth" => $wealth,
+            "rate" => $interest,
+            "pie" => $pie,
+            "loans" => $loans
         ]);
     }
 }
