@@ -24,7 +24,7 @@
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                   Saldo Koperasi</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($total,0,".",".") }}</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($wealth,0,".",".") }}</div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-wallet fa-2x text-gray-300"></i>
@@ -41,11 +41,11 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                  Total Simpanan Pokok</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($deposit,0,".",".") }}</div>
+                  Total Pemasukkan</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($assets,0,".",".") }}</div>
               </div>
               <div class="col-auto">
-                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                <i class="fas fa-arrow-down  fa-2x text-gray-300"></i>
               </div>
             </div>
           </div>
@@ -58,18 +58,18 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Simpanan Wajib
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Pengeluaran
                 </div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                        Rp {{ number_format($deposit_must,0,".",".") }}
+                        Rp {{ number_format($liabilities,0,".",".") }}
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-auto">
-                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                <i class="fas fa-arrow-up fa-2x text-gray-300"></i>
               </div>
             </div>
           </div>
@@ -83,8 +83,8 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                  Total Pinjaman Anggota</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($total_loan,0,".",".") }}</div>
+                  Sisa Hasil Usaha</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($rate,0,".",".") }}</div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -109,7 +109,7 @@
           <!-- Card Body -->
           <div class="card-body">
               <div class="table-responsive">
-                  <table class="table table-striped table-vcenter text-nowrap" id="dataTable" width="100%" cellspacing="0">
+                  <table class="table table-striped table-vcenter text-nowrap" width="100%" cellspacing="0">
                     <thead class="text-primary">
                         <tr>
                             <th>No</th>
