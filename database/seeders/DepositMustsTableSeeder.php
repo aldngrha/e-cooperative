@@ -20,7 +20,7 @@ class DepositMustsTableSeeder extends Seeder
             "amount_deposit" => 2000000,
             "description" => "skalkslkas",
             "deleted_at" => null,
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(1),
             "updated_at" => null
         ]);
 
@@ -29,7 +29,7 @@ class DepositMustsTableSeeder extends Seeder
             "amount_deposit" => 1000000,
             "description" => "skalkslkas",
             "deleted_at" => null,
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonth(2),
             "updated_at" => null
         ]);
     }

@@ -22,7 +22,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 900000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(9),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -33,7 +33,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 800000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(8),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -44,7 +44,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 700000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(7),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -55,7 +55,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 600000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(6),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -66,7 +66,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 500000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(5),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -77,7 +77,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 400000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(4),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -88,7 +88,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 300000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(3),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -99,7 +99,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 200000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(2),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -110,7 +110,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 10000,
             "remaining" => 100000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(1),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -122,7 +122,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 1800000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(9),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -133,7 +133,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 1600000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(8),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -144,7 +144,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 1400000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(7),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -155,7 +155,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 1200000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(6),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -166,7 +166,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 1000000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(5),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -177,7 +177,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 800000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(4),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -188,7 +188,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 600000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(3),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -199,7 +199,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 400000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(2),
             "updated_at" => null,
             "deleted_at" => null,
         ]);
@@ -210,7 +210,7 @@ class InstallmentsTableSeeder extends Seeder
             "interest_rate" => 20000,
             "remaining" => 200000,
             "description" => "KSLAKSa",
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(1),
             "updated_at" => null,
             "deleted_at" => null,
         ]);

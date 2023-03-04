@@ -29,7 +29,7 @@ class DepositVolutariesTableSeeder extends Seeder
             "amount_deposit" => 3000000,
             "description" => "skalkslkas",
             "deleted_at" => null,
-            "created_at" => Carbon::now(),
+            "created_at" => Carbon::now()->subMonths(1),
             "updated_at" => null
         ]);
     }
