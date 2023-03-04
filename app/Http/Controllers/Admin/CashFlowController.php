@@ -64,6 +64,7 @@ class CashFlowController extends Controller
             "income" => 0,
             "outcome" => 0,
         ];
+
         // Hitung total income
         $installment = Installment::whereMonth("created_at", $month)->whereYear("created_at", $year)->sum("amount_installment");
         $rateNow = Installment::whereMonth("created_at", $month)->whereYear("created_at", $year)->sum("interest_rate");

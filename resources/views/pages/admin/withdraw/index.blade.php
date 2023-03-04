@@ -42,7 +42,7 @@
                                 <td>{{ $item->members->name }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>Rp {{ number_format($item->amount_withdraw,0,".",".") }}</td>
-                                <td>Rp {{ number_format($item->amount_withdraw / 2,0,".",".") }}</td>
+                                <td>Rp {{ number_format($item->amount_withdraw * 0.7,0,".",".") }}</td>
                                 <td>
                                     @if ($item->status == "PENDING")
                                         <span class="p-2 badge badge-secondary">
@@ -52,7 +52,6 @@
                                                 <span class="p-2 badge badge-danger">
                                     @endif
                                             {{ $item->status }}
-                                        </span>
                                         </span>
                                         </span>
                                         </span>

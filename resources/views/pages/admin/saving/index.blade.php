@@ -24,7 +24,6 @@
                             <th>Kode Anggota</th>
                             <th>Nama Anggota</th>
                             <th>Jumlah Simpanan Pokok</th>
-                            <th>Keterangan</th>
                             <th>Waktu Pengajuan</th>
                             <th>Action</th>
                         </tr>
@@ -36,7 +35,6 @@
                                 <td>{{ $item->member_number }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>Rp {{ number_format($item->amount_deposit,0,".",".") }}</td>
-                                <td>{{ $item->description }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat("dddd, D MMMM YYYY") }}</td>
                                 <td>
                                     <a href="{{ route('saving.show', $item->id) }}" class="btn btn-info">

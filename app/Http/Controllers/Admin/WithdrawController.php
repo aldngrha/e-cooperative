@@ -9,6 +9,7 @@ use App\Models\Capital;
 use App\Models\Installment;
 use App\Models\Option;
 use App\Models\Surplus;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -26,18 +27,24 @@ class WithdrawController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $capital = Capital::where("description", "Saldo awal tahun")->sum("amount_capital");
+
         // Get the total balance of interest
         $totalInterest = Installment::sum('interest_rate');
 
-        // Get the total amount of previous withdrawals that have been accepted
-        $latestWithdraw = $withdraws->where('status', 'ACCEPT')->first();
+//        // Get the total amount of previous withdrawals that have been accepted
+//        $latestWithdraw = $withdraws->where('status', 'ACCEPT')->first();
+//
+//        $lastWithdrawAmount = $latestWithdraw ? $latestWithdraw->amount_withdraw : 0;
 
-        $lastWithdrawAmount = $latestWithdraw ? $latestWithdraw->amount_withdraw : 0;
+        $withdraw = $withdraws->where("status", "ACCEPT")->sum("amount_withdraw");
 
-        $remainingInterest = $totalInterest - $lastWithdrawAmount;
+        $remainingInterest = $totalInterest - $withdraw - $capital;
+
+        $total = $capital + $withdraw;
 
         if ($remainingInterest < 0) {
-            $remainingInterest += $lastWithdrawAmount;
+            $remainingInterest += $total;
         }
 
         // Get the date of the next withdrawal
@@ -74,23 +81,21 @@ class WithdrawController extends Controller
         $totalInterest = Installment::sum('interest_rate');
 
         // Get the total amount of previous withdrawals that have been accepted
-        $latestWithdraw = Surplus::where('status', 'ACCEPT')
-            ->orderBy("created_at", "desc")
-            ->first();
+        $withdraw = Surplus::where('status', 'ACCEPT')
+            ->sum("amount_withdraw");
 
-        $totalWithdrawn = $latestWithdraw ? $latestWithdraw->amount_withdraw : 0;
+        $capital = Capital::where("description", "Saldo awal tahun")->sum("amount_capital");
+
+//        $totalWithdrawn = $latestWithdraw ? $latestWithdraw->amount_withdraw : 0;
 
         // Calculate the remaining balance of interest after previous withdrawals
-        $remainingInterest = $totalInterest - $totalWithdrawn;
+        $remainingInterest = $totalInterest - $withdraw - $capital;
 
         Capital::create([
             "surplus_id" => null,
             "amount_capital" => $remainingInterest,
             "description" => "Saldo awal tahun"
         ]);
-
-        // Set the interest rates of all installments to null
-        Installment::where("interest_rate", ">", 0)->update(['interest_rate' => 0]);
 
         return redirect()->route("withdraw.index")->with("message", "Berhasil menambahkan ke saldo awal tahun");
     }
@@ -103,7 +108,14 @@ class WithdrawController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::with(["surpluses"])->findOrFail($id);
+
+        $items = $users->surpluses()->get();
+
+        return view("pages.admin.withdraw.withdraw-detail", [
+            "users" => $users,
+            "items" => $items
+        ]);
     }
 
     /**
@@ -137,14 +149,14 @@ class WithdrawController extends Controller
 
         // check if the status has changed to ACCEPT from previous status
         if ($withdraw->status == 'ACCEPT' && $previousStatus != 'ACCEPT') {
-            // divide the withdrawal amount by 2
-            $capitalAmount = $withdraw->amount_withdraw / 2;
+            // divide the withdrawal amount by 30%
+            $capitalAmount = $withdraw->amount_withdraw * 0.3;
 
             // add a new record to the Capital table
             Capital::create([
                 "surplus_id" => $withdraw->id,
                 "amount_capital" => $capitalAmount,
-                "description" => "50% dari penarikan SHU"
+                "description" => "30% dari penarikan SHU"
             ]);
         }
 

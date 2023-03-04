@@ -16,18 +16,22 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request) {
+    public function index() {
 
-        $totalInstallment = Installment::sum("amount_installment");
-        $rate = Installment::sum("interest_rate");
+        $installments = Installment::all();
+        $capitals = Capital::all();
+        $withdraws = Surplus::all();
+
+        $totalInstallment = $installments->sum("amount_installment");
+        $rate = $installments->sum("interest_rate");
         $totalDeposit = User::sum("amount_deposit");
         $totalDepositMust = DepositMust::sum("amount_deposit");
         $totalDepositVoluntary = DepositVoluntary::sum("amount_deposit");
-        $totalCapital = Capital::sum("amount_capital");
+        $totalCapital = $capitals->sum("amount_capital");
 
         $totalLoan = Loan::sum("amount_loan");
         $totalExpense = Spend::sum("amount_spend");
-        $totalWithdraw = Surplus::sum("amount_withdraw");
+        $totalWithdraw = $withdraws->sum("amount_withdraw");
 
         $loans = Loan::with(["members"])->get();
 
@@ -35,6 +39,11 @@ class DashboardController extends Controller
         $liabilities = $totalLoan + $totalExpense + $totalWithdraw;
 
         $wealth = $assets - $liabilities;
+
+        $capital = $capitals->where("description", "Saldo awal tahun")->sum("amount_capital");
+        $withdraw = $withdraws->where("status", "ACCEPT")->sum("amount_withdraw");
+
+        $interest = $rate - $capital - $withdraw;
 
         $pie = [
             "tertunda" => Loan::where("status", "TERTUNDA")->count(),
@@ -46,7 +55,7 @@ class DashboardController extends Controller
             "assets" => $assets,
             "liabilities" => $liabilities,
             "wealth" => $wealth,
-            "rate" => $rate,
+            "rate" => $interest,
             "pie" => $pie,
             "loans" => $loans
         ]);
