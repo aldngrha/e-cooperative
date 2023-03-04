@@ -32,9 +32,10 @@ class UserFactory extends Factory
             "gender" => $this->faker->randomElement(['Laki-Laki', 'Perempuan']),
             "position" => $this->faker->randomElement(["Guru", "Tata Usaha", "Staff"]),
             'address' => $this->faker->address(),
-            'created_at' => now(),
+            'created_at' => $this->faker->dateTimeBetween("-10 months", "-1 months"),
             'roles' => 'USER',
             'amount_deposit' => 2000000,
+            'status' => "TERDAFTAR"
         ];
     }
 
