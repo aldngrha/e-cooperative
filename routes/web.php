@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\LoanController as Loans;
 use App\Http\Controllers\Admin\InstallmentController as Installment;
 use App\Http\Controllers\Admin\WithdrawController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\CashFlowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,8 @@ Route::prefix("admin")
         Route::resource("withdraw", "WithdrawController");
         Route::get('/withdraw/print/{firstDate}/{lastDate}', [WithdrawController::class, "print"])->name('print-withdraw');
         Route::resource("member", "MemberController");
+        Route::resource("/cash-flow", "CashFlowController");
+        Route::post("/cash-flow", [CashFlowController::class, "getData"])->name("data");
 });
 
 Auth::routes();
