@@ -87,10 +87,19 @@
       <i class="fas fa-fw fa-money-bill"></i>
       <span>Sisa Hasil Usaha (SHU)</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="">
-      <i class="fas fa-fw fa-file-pdf"></i>
-      <span>Laporan</span></a>
+  <li class="nav-item {{ request()->is('admin/cash-flow*') ? 'active' : '' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#report"
+       aria-expanded="true" aria-controls="report">
+         <i class="fas fa-fw fa-file"></i>
+         <span>Laporan</span>
+    </a>
+    <div id="report" class="collapse" aria-labelledby="report" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Laporan</h6>
+          <a class="collapse-item" href="{{ route("cash-flow.index") }}">Laporan Arus Kas</a>
+          <a class="collapse-item" href="">Laporan Sisa Hasil Usaha</a>
+      </div>
+    </div>
   </li>
 
 
