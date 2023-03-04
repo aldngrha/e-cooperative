@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string("position")->nullable();
             $table->text("address")->nullable();
             $table->integer("amount_deposit")->nullable();
+            $table->string("status")->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
