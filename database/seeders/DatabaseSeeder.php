@@ -22,12 +22,12 @@ class DatabaseSeeder extends Seeder
         $this->call([OptionsTableSeeder::class]);
         $this->call([LoansTableSeeder::class]);
         $this->call([InstallmentsTableSeeder::class]);
-//        $this->call([DepositMustsTableSeeder::class]);
-//        $this->call([DepositVolutariesTableSeeder::class]);
+        $this->call([DepositMustsTableSeeder::class]);
+        $this->call([DepositVolutariesTableSeeder::class]);
 
         User::factory(10)->create();
-        DepositMust::factory(10)->create();
-        DepositVoluntary::factory(10)->create();
+//        DepositMust::factory(10)->create();
+//        DepositVoluntary::factory(10)->create();
 //        Loan::factory(10)->create();
     }
 }

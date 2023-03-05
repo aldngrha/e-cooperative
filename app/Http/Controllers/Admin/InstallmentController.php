@@ -122,8 +122,17 @@ class InstallmentController extends Controller
     }
 
     public function print($firstDate, $lastDate) {
+        $defaultMonth = Carbon::parse(request('firstDate'))->locale('id')->monthName;
+        $defaultYear = Carbon::parse(request('firstDate'))->year;
+
+        $startDate = Carbon::parse($firstDate)->startOfDay();
+        $endDate = Carbon::parse($lastDate)->endOfDay();
+
+        $month = $defaultMonth;
+        $year = $defaultYear;
+
         $items = Installment::with(["loans.members"])
-            ->whereBetween("created_at", [$firstDate, $lastDate])
+            ->whereBetween("created_at", [$startDate, $endDate])
             ->get();
 
         $option = Option::find(1)->interest_rate;

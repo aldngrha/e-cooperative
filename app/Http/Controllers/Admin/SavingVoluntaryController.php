@@ -105,7 +105,16 @@ class SavingVoluntaryController extends Controller
     }
 
     public function print($firstDate, $lastDate) {
-        $items = DepositVoluntary::with(["members"])->whereBetween("created_at", [$firstDate, $lastDate])->get();
+        $defaultMonth = Carbon::parse(request('firstDate'))->locale('id')->monthName;
+        $defaultYear = Carbon::parse(request('firstDate'))->year;
+
+        $startDate = Carbon::parse($firstDate)->startOfDay();
+        $endDate = Carbon::parse($lastDate)->endOfDay();
+
+        $month = $defaultMonth;
+        $year = $defaultYear;
+
+        $items = DepositVoluntary::with(["members"])->whereBetween("created_at", [$startDate, $endDate])->get();
 
         foreach ($items as $item) {
             // membuat instance Carbon dari atribut created_at

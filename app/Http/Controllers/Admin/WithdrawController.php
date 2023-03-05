@@ -175,8 +175,17 @@ class WithdrawController extends Controller
     }
 
     public function print($firstDate, $lastDate) {
+        $defaultMonth = Carbon::parse(request('firstDate'))->locale('id')->monthName;
+        $defaultYear = Carbon::parse(request('firstDate'))->year;
+
+        $startDate = Carbon::parse($firstDate)->startOfDay();
+        $endDate = Carbon::parse($lastDate)->endOfDay();
+
+        $month = $defaultMonth;
+        $year = $defaultYear;
+
         $items = Surplus::with(["members"])
-            ->whereBetween("created_at", [$firstDate, $lastDate])
+            ->whereBetween("created_at", [$startDate, $endDate])
             ->get();
 
         foreach ($items as $item) {
