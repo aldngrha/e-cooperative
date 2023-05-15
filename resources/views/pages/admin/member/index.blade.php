@@ -29,6 +29,8 @@
                             <th>No</th>
                             <th>Kode Anggota</th>
                             <th>Name</th>
+                            <th>KTP</th>
+                            <th>KK</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
                             <th>Nomor HP</th>
@@ -44,6 +46,38 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->member_number }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#imageModal{{ $user->id }}">
+                                            <img src="{{ Storage::url($user->id_card) }}" class="img-thumbnail cursor-pointer" style="width: 150px" alt="KTP">
+                                        </a>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="imageModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <img src="{{ Storage::url($user->id_card) }}" class="img-fluid" alt="KTP">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#imageModal{{ $user->id }}">
+                                            <img src="{{ Storage::url($user->family_card) }}" class="img-thumbnail cursor-pointer" style="width: 150px" alt="KTP">
+                                        </a>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="imageModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <img src="{{ Storage::url($user->family_card) }}" class="img-fluid" alt="KTP">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{{ $user->place_of_birth }}</td>
                                     <td>{{ Carbon\Carbon::parse($user->birth_of_date)->isoFormat("D MMMM, YYYY") }}</td>
                                     <td>{{ $user->phone_number }}</td>

@@ -47,8 +47,8 @@
                         </div>
                         <div class="col">
                             <p class="text-primary">Rp {{ number_format($rate < 0 ? 0 : $rate,0,".",".") }}</p>
-                            <p class="text-primary">50%</p>
-                            <p class="text-primary">50%</p>
+                            <p class="text-primary">30%</p>
+                            <p class="text-primary">70%</p>
                         </div>
                     </div>
                     <div class="row">
@@ -72,7 +72,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="row align-items-center">
-                                    <label class="col-sm-2" for="amount_withdraw">Jumlah Pinjaman</label>
+                                    <label class="col-sm-2" for="amount_withdraw">Jumlah Penarikan</label>
                                     <div class="col-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-prepend">

@@ -18,7 +18,7 @@ class DepositMustFactory extends Factory
         return [
             "users_id" => self::$incrementingInteger++,
             "amount_deposit" => $this->faker->numberBetween(1, 20) * 100000,
-            "description" => $this->faker->text(50),
+            "description" => "Sudah",
             "deleted_at" => null,
             "created_at" => $this->faker->dateTimeBetween("-7 months", "-1 months"),
             "updated_at" => null

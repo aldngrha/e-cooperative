@@ -31,6 +31,8 @@ class UserRequest extends FormRequest
             "phone_number" => "max:255",
             "gender" => "max:255",
             "position" => "max:255",
+            "family_card" => "image|mimes:jpeg,png,jpg",
+            "id_card" => "image|mimes:jpeg,png,jpg",
             "address" => "",
         ];
     }

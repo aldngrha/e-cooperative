@@ -29,6 +29,8 @@ class User extends Authenticatable
         "gender",
         "position",
         "address",
+        "family_card",
+        "id_card",
         "amount_deposit"
     ];
 

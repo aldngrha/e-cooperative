@@ -34,21 +34,6 @@ class LoanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -105,11 +90,7 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
-
+    
     public function print($firstDate, $lastDate) {
         $defaultMonth = Carbon::parse(request('firstDate'))->locale('id')->monthName;
         $defaultYear = Carbon::parse(request('firstDate'))->year;

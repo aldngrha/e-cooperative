@@ -12,20 +12,6 @@
 
         </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @elseif(session()->has("message"))
-            <div class="alert alert-success">
-                <p>{{  session()->get("message") }}</p>
-            </div>
-        @endif
-
         <div class="card shadow">
             <div class="card-header">
                 <h3 class="card-title text-primary font-weight-bold">Profil Anggota</h3>
@@ -41,7 +27,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route("update") }}" method="POST">
+                <form action="{{ route("update") }}" method="POST" enctype="multipart/form-data">
                     @method("put")
                     @csrf
                     <div class="card-body">
@@ -108,6 +94,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label class="form-label">Kartu Tanda Penduduk</label>
+                                    <input type="file" name="id_card" class="form-control{{ $errors->has('id_card') ? ' is-invalid' : '' }}" >
+                                    @if ($errors->has('id_card'))
+                                        <span class="invalid-feedback">{{ $errors->first('id_card') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Kartu Keluarga</label>
+                                    <input type="file" name="family_card" class="form-control{{ $errors->has('family_card') ? ' is-invalid' : '' }}" >
+                                    @if ($errors->has('family_card'))
+                                        <span class="invalid-feedback">{{ $errors->first('family_card') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="form-label">Jenis Kelamin</label>
                                     <div class="custom-controls-stacked">
                                         <label class="custom-control custom-radio custom-control-inline">
@@ -131,6 +137,46 @@
                             @if ($errors->has('address'))
                                 <span class="invalid-feedback">{{ $errors->first('address') }}</span>
                             @endif
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="container d-flex flex-column justify-content-start">
+                                <h1>KTP</h1>
+                                <a data-toggle="modal" data-target="#imageModal{{ $user->id }}">
+                                    <img src="{{ Storage::url($user->id_card) }}" class="img-thumbnail cursor-pointer" style="width: 250px; height: 200px;" alt="KTP">
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="imageModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <img src="{{ Storage::url($user->id_card) }}" class="img-fluid" alt="KK">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container d-flex flex-column justify-content-start">
+                                <h1>KK</h1>
+                                <a data-toggle="modal" data-target="#imageModal{{ $user->id }}">
+                                    <img src="{{ Storage::url($user->family_card) }}" class="img-thumbnail cursor-pointer" style="width: 250px; height: 200px;" alt="KTP">
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="imageModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <img src="{{ Storage::url($user->family_card) }}" class="img-fluid" alt="KK">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer text-right">

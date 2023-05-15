@@ -15,11 +15,22 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function edit() {
-        return view("pages.member");
+        $user = Auth::user();
+        return view("pages.member", [
+            "user" => $user
+        ]);
     }
 
     public function update(UserRequest $request) {
         $data = $request->all();
+        
+        if ($request->hasFile('id_card')) {
+            $data['id_card'] = $request->file('id_card')->store('assets/photo', 'public');
+        }
+
+        if ($request->hasFile('family_card')) {
+            $data['family_card'] = $request->file('family_card')->store('assets/photo', 'public');
+        }
         auth()->user()->update($data);
         return back()->with("message", "Profil sudah diubah");
     }

@@ -12,6 +12,7 @@ use App\Models\Spend;
 use App\Models\Surplus;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -43,7 +44,8 @@ class HomeController extends Controller
         $totalExpense = Spend::sum("amount_spend");
         $totalWithdraw = $withdraws->sum("amount_withdraw");
 
-        $loans = Loan::with(["members"])->get();
+        $user = Auth::user();
+        $loans = $user->loans()->get();
 
         $assets = $totalDeposit + $totalInstallment + $totalDepositVoluntary + $totalDepositMust + $totalCapital + $rate;
         $liabilities = $totalLoan + $totalExpense + $totalWithdraw;
