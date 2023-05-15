@@ -63,12 +63,12 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a data-toggle="modal" data-target="#imageModal{{ $user->id }}">
+                                        <a data-toggle="modal" data-target="#imageModal{{ $user->id }}2">
                                             <img src="{{ Storage::url($user->family_card) }}" class="img-thumbnail cursor-pointer" style="width: 150px" alt="KTP">
                                         </a>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="imageModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="imageModal{{ $user->id }}2" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">

@@ -32,9 +32,13 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->deposits()->delete();
         $user->depositMusts()->delete();
+        $user->depositVoluntaries()->delete();
+        $user->loans()->each(function ($loan) {
+            $loan->installments()->delete();
+        });;
         $user->loans()->delete();
+        $user->surpluses()->delete();
         $user->delete();
 
         return back()->with("message", "Anggota telah dihapus");

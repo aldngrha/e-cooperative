@@ -162,12 +162,12 @@
                         <div class="col-md-6">
                             <div class="container d-flex flex-column justify-content-start">
                                 <h1>KK</h1>
-                                <a data-toggle="modal" data-target="#imageModal{{ $user->id }}">
+                                <a data-toggle="modal" data-target="#imageModal{{ $user->id }}2">
                                     <img src="{{ Storage::url($user->family_card) }}" class="img-thumbnail cursor-pointer" style="width: 250px; height: 200px;" alt="KTP">
                                 </a>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="imageModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="imageModal{{ $user->id }}2" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
